@@ -10,9 +10,9 @@ Løsningen for elektronisk tinglysing bygger videre på de konsepter og teknolog
 
 ### Innholdsfortegnelse
 
-1. [Konsepter](#konsepter)
-2. [Innsendingsgrensesnitt](#innsendingsgrensesnitt)
-3. [Innsending med Altinn Formidlingstjeneste](#innsending-med-altinn-formidlingstjeneste)
+1. [Konsepter](#1-konsepter)
+2. [Innsendingsgrensesnitt](#2-innsendingsgrensesnitt)
+3. [Innsending med Altinn Formidlingstjeneste](#3-innsending-med-altinn-formidlingstjeneste)
 
 
 ## 1. Konsepter
