@@ -8,7 +8,14 @@
 
 Løsningen for elektronisk tinglysing bygger videre på de konsepter og teknologier som er anvendt for Ny grunnbok, og tilbyr et nytt Web Service basert API for elektronisk innsending av dokumenter til tinglysing. Grensesnittet tilbyr tjenester for validering av dokumenter før innsending, tjenester for innsending til tinglysing samt tjenester for uthenting av tinglysingsresultat. I tillegg tilbys den funksjonalitet som ble introdusert med Ny grunnbok.
 
-## Konsepter 
+### Innholdsfortegnelse
+
+1. [Konsepter](#konsepter)
+2. [Innsendingsgrensesnitt](#innsendingsgrensesnitt)
+3. [Innsending med Altinn Formidlingstjeneste](#innsending-med-altinn-formidlingstjeneste)
+
+
+## 1. Konsepter
 
 ### Melding
 
@@ -48,7 +55,8 @@ Se for øvrig beskrivelsen [Signatur Fullmakt og Vitner](http://www.kartverket.n
 
 Støtte for vedlegg til dokumenter er ikke planlagt for første versjon av systemet. Det innebærer at dokumenter ikke kan sendes inn elektronisk da formatet for elektronisk innsending ikke støtter dette Et eksempel kan være dokumenter der noen av de berørte parter er mindreårige.
 
-## Innsendingsgrensesnitt
+## 2. Innsendingsgrensesnitt
+
 
 Innsendingsgrensesnittet baserer seg på en signeringsløsning, basert på SEID-SDO med bruk av BankID XML og XSL for visning av dokumenter til signering for sluttbruker.
 
@@ -153,7 +161,7 @@ Vil bli validert på tom måter, først mot det som folkeregisteret representere
 
 Validering av navn fra enhetsregisteret blir gjort mot det som heter «Redigert navn» som har en maksimal lengde på 50 tegn. Hvis ikke redigert navn stemmer med det innsendte navnet så validerer vi mot et navn bestående av organisasjonsnavn1..organisasjonsnavn5 med mellomrom i mellom. Sammenlikningen er case insensitiv.
 
-## Innsending med Altinn Formidlingstjeneste
+## 3. Innsending med Altinn Formidlingstjeneste
 
 Altinn Formidlingstjeneste er den primære kanalen for å benytte innsendingsgrensesnittet. I produksjon vil sendTilTinglysing og hentStatus kun være tilgjengelig via Altinn grensesnittet mens valider vil være tilgjengelig både via Altinn og WebService grensesnittet. For detaljert dokumentasjon og kodeeksempler på hvordan man kan integrere mot innsendingsgrensesnittet via Altinn finnes det en eksempelklient tilgjengelig i GitHub. Det vil derfor kun bli gitt en overordnet beskrivelse av funksjonaliteten i dette dokumentet.
 Formidlingstjenesten i Altinn baserer seg på at man laster opp en zip fil til Altinn som deretter blir formidlet til riktig mottaker(e). Innholdet i zip filen vil være en fil som inneholde en forsendesle. Det er kun støtte for å sende en forsendelse av gangen i zip filen. Tjenesten som Kartverket har satt opp er konfigurert sånn at det er kun mulig å sende og motta filer til/fra Kartverket. 
