@@ -13,6 +13,14 @@ Løsningen for elektronisk tinglysing bygger videre på de konsepter og teknolog
 1. [Konsepter](#1-konsepter)
 2. [Innsendingsgrensesnitt](#2-innsendingsgrensesnitt)
 3. [Innsending med Altinn Formidlingstjeneste](#3-innsending-med-altinn-formidlingstjeneste)
+4. [Prosessflyt](#4-prosessflyt)
+5. [Funksjonalitet og begrensninger](#5-funksjonalitet-og-begrensninger)
+6. [Innsending av signerte dokumenter](#6-innsending-av-signerte-dokumenter)
+7. [Hvilke identifikasjonsnumre følger med inn til signaturkontroll](#7-hvilke-identifikasjonsnumre-følger-med-inn-til-signaturkontroll)
+8. [Hvordan behandles signaturene i et signert dokument](#8-hvordan-behandles-signaturene-i-et-signert-dokument)
+9. [Bruk av BANKID grensesnitt for å signere SDO](#9-bruk-av-bankid-grensesnitt-for-å-signere-sdo)
+10. [Statustjeneste for systemet](#10-statustjeneste-for-systemet)
+11. [Endepunkter for test og produksjon](#11-endepunkter-for-test-og-produksjon)
 
 
 ## 1. Konsepter
@@ -187,11 +195,11 @@ For dokumentasjon av Altinn løsningen se [altinn dokumentasjon for sluttbrukers
 * 6.14 BrokerService – Formidlingstjenester (WS)
 * 11 Vedlegg C: Flytdiagram for formidlingstjeneste
 
-## Prosessflyt 
+## 4. Prosessflyt 
 
 Systemet implementerer en asynkron prosessflyt, slik at tinglysingskallet kun sikrer at systemet har mottatt meldingen. Videre behandling av meldingen skjer asynkront. Innsendingsapiet har tjenesten hentStatus som innsender kan kalle for å følge med på meldingens behandlingsstatus. Når tjenesten for å tinglyse en melding har returnert uten feil, garanteres det at meldingen er mottatt av systemet og at et påfølgende kall som henter behandlingsstatus vil returnere en ikke-tom respons.
 
-## Funksjonalitet og begrensninger 
+## 5. Funksjonalitet og begrensninger 
 
 Det finnes 9 typer rettsstiftelser som skal kunne sendes inn av eksterne aktører i første versjon av systemet tilgjengelig for elektronisk innsending:
 
@@ -211,7 +219,7 @@ Innsendingsgrensesnittet krever at XML-delen tilhørende BIDXML kan valideres mo
 
 Det er ingen validering av gyldig offisiell versjon av XSL når man skal validere BIDXML for følgebrev.
 
-## Innsending av signerte dokumenter
+## 6. Innsending av signerte dokumenter
 
 For å forenkle testingen av hvordan man må bygge opp rettsstiftelser, så støtter innsendings-api i test validering samt mottak og behandling av usignerte meldinger. 
 
@@ -450,7 +458,7 @@ Det er dette grunnlaget, inkludert digest-referanser som skal signeres med bruke
 Hvis det er flere dokumenter i en melding, så gjentas denne prosessen for hvert av de dokumentene som man skal signere. En SDO kan kun inneholde et `<dokument>` eller et `<foelgebrev>` som rotnode inne i BIDXML. Forutsetningen er at man signerer på et dokument i sin helhet. Disse kan signeres av rettighetshavere i forskjellige løsninger, slik som i en nettbank eller en signeringsportal. Når det er flere rettighetshavere som skal signere, så vil man normalt samle inn flere SDO fra BankId for disse signeringene for så å kombinere dette inn i en SDO med flere signaturer. Dette er mulig når det signerte innholdet er likt, men det er flere rettighetshavere som skal signere.
 For følgebrevet som skal signeres med brukerstedssertifikat så er det ikke noen spesielle krav til xsl-transformasjonen som pakkes inn sammen med følgebrevet ut over de krav som eventuelt kommer fra BankId. Kartverket leverer ikke fra seg noen xsl for følgebrevet og har derfor heller ikke noen validering av dette innholdet.
  
-## Hvilke identifikasjonsnumre følger med inn til signaturkontroll
+## 7. Hvilke identifikasjonsnumre følger med inn til signaturkontroll
 
 Identifikasjonsnumre som kan utledes fra sertifikatet enten gjennom oppslag i BankId sin VA tjeneste, eller hentet ut fra subjekt feltet for brukerstedssertifikat, følger som hovedregel med inn i signaturkontrollen, men det finnes noen unntak for å forhindre at signaturer fra brukersteder som tilrettelegger for signering følger med inn i denne kontrollen. 
 
@@ -512,7 +520,7 @@ Sletting signeres av Ansatt i Nordea med personlig BankId, følgebrev signeres a
 
 Dette eksempelet viser at vi ikke formidler brukerstedets identifikasjonsnummer når det opptrer sammen med en personlig signatur (Multisigned SDO). I de tilfellene så vi kun identifikasjonsnummer for personer formidles inn til signaturkontroll. DnB som rettighetshaver kommer med fordi følgebrevet er signert av DnB. 
  
-## Hvordan behandles signaturene i et signert dokument
+## 8. Hvordan behandles signaturene i et signert dokument
 
 Vi ønsker at alle tester som kjører med usignerte meldinger skal være så representative som mulig. Vi har tatt hensyn til dette gjennom at behandlingen av en melding med usignerte data er så lik som den med signerte data som mulig. Med signert melding mener vi her en forsendelse med der feltet `<signertMelding>` er fylt ut. 
 
@@ -600,7 +608,7 @@ Det konverterte dokumentet vil da se slik ut:
 
 Her ser vi at forsendelsen med en signertMelding har blitt konvertert til en forsendelse med `<usignertMelding>`, legg spesielt merke til hvordan signaturene har blitt hentet fra `<dokument>` og `<følgebrev>` og plassert inn i seksjonen for `<ikkeDigitaleSignaturer>`. All behandling som gjelder signaturkontroll vil bli gjort på dette elementet med disse signaturene.
 
-## Bruk av BANKID grensesnitt for å signere SDO
+## 9. Bruk av BANKID grensesnitt for å signere SDO
 
 BankId tilbyr klientgrensesnitt og eksempelklienter i Java og C# for å implementere signeringsdialog som brukersted, både for sluttbruker gjennom signering i nettleser, men også for serversidesignering som brukersted. 
 
@@ -752,7 +760,7 @@ Hvis dette identifikasjonsnummeret ikke er utstedt til riktig enhet i organisasj
 
 Brukerstedssertifikat kan i utgangspunktet ikke benyttes til signering av dokumenter som rettighetshaver med unntak av tilfelle der man bruker dette sertifikatet til å signere både følgebrev og dokument(er). En melding som inneholder slike dokumenter vil i utgangspunktet bli avvist.
  
-## Statustjeneste for systemet
+## 10. Statustjeneste for systemet
 
 Det er tilgjengeliggjort en tjeneste som skal gi status for om systemet er tilgjengelig eller ikke. Tjenesten gir status for tre deler av systemet: Innsendingstjenestene, Valideringstjenesten og Grunnbokstjenestene. Status for hver av systemene kan være en av følgende:
 
@@ -822,7 +830,7 @@ Dersom en eller flere av sjekkene som blir utført gir svar at systemet er nede 
 * Valideringstjeneste (UP/DOWN): Ved status DOWN vil ikke validering være tilgjengelig gjennom webservice grensesnittet.
 * Grunnbokstjenester (UP/DOWN): Ved status DOWN vil ikke de andre grunnbokstjenestene være tilgjengelig gjennom webservice grensesnittet.
  
-## Endepunkter for test og produksjon
+## 11. Endepunkter for test og produksjon
 
 Dette avsnittet vil gi en oversikt over endepunkter for produksjon, betatestmiljøet og for testmiljøet vårt (EtglTest), både for direkte aksess til Innsendingstjenestene våre og til Altinn sine endepunkter.
 
