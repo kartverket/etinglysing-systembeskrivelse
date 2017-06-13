@@ -1,4 +1,5 @@
-![Statens Kartverk](lenke til logo)
+![Statens Kartverk](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/kartverket.png)
+
 
 # Systembeskrivelse for eksterne aktører
 
@@ -89,11 +90,12 @@ Etter at en melding er mottatt av systemet kan man hente oppdatert behandlingsst
 
 #### Sekvensdiagram
  
-
+![Sekvensdiagram](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/sekvensdiag.png)
  
 #### Forsendelse
  
-Figur 1Forsendelse
+![Figur 1Forsendelse](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/forsendelse1.png)
+
 Dokumenter som ønskes tinglyst som en enhet samles som en signert eller en usignert melding i en forsendelse. Meldingen inneholder ett eller flere dokumenter, samt et følgebrev som refererer til de individuelle dokumentene, og dermed også bekrefter hvor mange dokumenter forsendelsen inneholder og hvilken rekkefølge disse har.
 
 Følgebrevet inneholder også innsenders identifikasjonsnummer, og det valideres at innsender er en eksisterende person eller organisasjon. Innsender må signere på følgebrevet med sitt brukerstedssertifikat. 
@@ -102,7 +104,7 @@ Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne o
 
 #### Forsendelsesstatus
 
-Figur 2 Forsendelsesstatus
+![Figur 2 Forsendelsesstatus](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/forsendelse2.png)
 
 Tjenestene for validering og tinglysing returnerer en forsendelsesstatus. 
 For validering vil behandlingsinformasjon være satt dersom det ble funnet feil, mens tinglysingsinformasjon aldri vil være satt. 
@@ -160,11 +162,11 @@ Formidlingstjenesten i Altinn baserer seg på at man laster opp en zip fil til A
 
 For å kalle Altinn formidlingstjenesten benyttes et sett SOAP endepunkter. For å kalle en av operasjonene i innsendingsgrensesnittet til Kartverket må man først initiere en overførsel i Altinn og angi hvilken operasjon man ønsker å kalle (sendTilTinglysing, hentStatus eller valider). Deretter laster man opp en zip fil som inneholder en (og bare en) fil med payload på formatet definert av innsending.xsd. For å følge med på status for en opplastet fil må det polles etter kvitteringen til filen. Der vil det være synlig om forsendelsen har blitt hentet ned fra Kartverket, og om den har blitt mottatt eller om noe har feilet. Se figur nedenfor for en beskrivelse av flyten og hvilke tjenester fra Altinn som benyttes.
 
-**FIGUR 1 Altinn HER**
+![Figur 1 Altinn](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/altinn1.png)
  
 Dersom forsendelsen har blitt mottatt og innsendingsgrensesnittet har klart å lese forsendelsen vil det bli sendt en eller flere filer tilbake via Altinn som respons på forsendelsen. Operasjonene valider og hentStatus vil kun trigge at en fil blir sendt tilbake, mens dersom man kaller sendTilTinglysing vil man få en ny forsendelsesstatus hver gang det skjer en relevant endring i status. Det må derfor kontinuerlig sjekkes mot Altinn om det har kommet nye filer. Man poller på filer basert på organisasjonsnummer. For å koble sammen forsendelseresponsen til riktig utgående forespørsel benyttes innsendingsId. Dersom innsendingsId ikke finnes kan en egen referanse man selv setter i det man initierer oversendelsen (sendersReference) benyttes. Se en figuren nedenfor for en beskrivelse av flyten og av hvilke tjenester som blir benyttet.
 
-**FIGUR 2 ALTINN HER**
+![Figur 2 Altinn](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/altinn2.png)
  
 Før man kan ta i bruk Altinn som kanal for inngående meldinger så må man få satt opp riktige tilganger hos Kartverket, samt at man selv må inn å opprette bruker og gi riktig tilgang i Altinn sluttbrukerløsning. Mer om hvordan dette kan gjøres er beskrevet i dokumentasjonen som følger med eksempelklienten. Ta kontakt med Kartverket via post@grunnbok.no for å få satt opp de tilgangene man trenger og får å få tildelt et fiktivt organisasjonsnummer til bruk i test.
 
@@ -604,7 +606,7 @@ Kodeeksemplene nedenfor benytter er skrevet i Java og benytter at klientbibliokt
 
 Eksempelet antar også at man har satt opp en BankId-klienten slik at denne kan vises korrekt, eksempelvis slik:
  
-**BANKIDBILDE HER**
+![Figur BankId](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/bankid.png)
 
 Dette vil variere fra brukersted til brukersted. Kartverket stiller ingen krav til utforming her.
 
