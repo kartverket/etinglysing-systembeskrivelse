@@ -188,12 +188,7 @@ Før man kan ta i bruk Altinn som kanal for inngående meldinger så må man få
 
 ### Altinn dokumentasjon
 
-For dokumentasjon av Altinn løsningen se [altinn dokumentasjon for sluttbrukersystemer](https://altinnett.brreg.no/no/Sluttbrukersystemer/) og dokumentet som heter «Implementasjonguide for sluttbrukersystem». Det er særlig disse seksjonene i dokumentet som er relevante:
-
-* 4.5 Benytt Formidlingstjenester
-* 6.4 Receipt
-* 6.14 BrokerService – Formidlingstjenester (WS)
-* 11 Vedlegg C: Flytdiagram for formidlingstjeneste
+For dokumentasjon av Altinn løsningen se [altinn dokumentasjon for sluttbrukersystemer](https://altinn.github.io/docs/guides/sluttbrukersystem/) særlig det som gjelder formidlingstjenesten.
 
 ## 4. Prosessflyt 
 
