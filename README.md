@@ -836,9 +836,13 @@ Testsystemene representerer et system under utvikling der de ulike deler av syst
 
 ### Produksjon
 
-##### Innsendingstjeneste
+#### Innsendingstjeneste
 
 https://www.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
+
+#### Valideringstjeneste
+
+https://www.grunnbok.no/grunnbok/wsapi/v2/ValideringServiceWS
 
 Merk; adressen over refererer til en kjørende tjeneste for dagens produksjon som skal erstattes av den nye tjenesten.  Den eksisterende tjenesten vil kjøre i produksjon frem til 18.04.2017 06:00. Etter dette vil den erstattes av den nye tjenesten klokken 08:00, men det betyr også at www.grunnbok.no bytter IP adresse til ny server i dette tidsrommet. Adressen vil da endres fra 159.162.103.93 til 159.162.103.105.
 
@@ -898,6 +902,10 @@ Disse tjenestene vil også være tilgjengelig på https://www.grunnbok.no, men i
 
 https://etgltest.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
 
+#### Valideringstjeneste
+
+https://etgltest.grunnbok.no/grunnbok/wsapi/v2/ValideringServiceWS
+
 #### Innsynstjenester
 
 https://etgltest.grunnbok.no
@@ -929,9 +937,13 @@ https://etgltest.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for over
 
 ### Testmiljø - Betatest
 
- Innsendingstjeneste
+#### Innsendingstjeneste
 
 https://betatest.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
+
+#### Valideringstjeneste
+
+https://betatest.grunnbok.no/grunnbok/wsapi/v2/ValideringServiceWS
 
 #### Innsynstjenester
 
