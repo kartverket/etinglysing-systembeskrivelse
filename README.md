@@ -61,7 +61,7 @@ Se for øvrig beskrivelsen [Signatur Fullmakt og Vitner](http://www.kartverket.n
 
 ### Vedlegg 
 
-Støtte for vedlegg til dokumenter er ikke planlagt for første versjon av systemet. Det innebærer at dokumenter ikke kan sendes inn elektronisk da formatet for elektronisk innsending ikke støtter dette Et eksempel kan være dokumenter der noen av de berørte parter er mindreårige.
+Dokumenter som krever vedlegg for å kunne tinglyses kan ikke sendes inn elektronisk, dette er foreløpig ikke støttet i løsningen.
 
 ## 2. Innsendingsgrensesnitt
 
@@ -204,7 +204,7 @@ Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av ek
 * Pant
 * Annen heftelse
 * Sletting
-* Transport, herunder Massetransport
+* Transport, herunder massetransport
 * Nedkvittering
 * Tinglysing på ny
 * Prioritetsbestemmelse for dokumentnummer
@@ -212,7 +212,7 @@ Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av ek
 * Tvangsforretning (kun enkelte aktører)
 * Anmerkning på person (kun enkelte aktører)
 
-Dokumentasjon av rettstypene finnes i UML-modellen for innsending. Implementasjonen av hver rettstype er ikke komplett, det vil si at det kan være valideringsregler og annen forretningslogikk som vil komme på plass senere. Det samme gjelder valideringslogikk rundt selve forsendelsen. Enkelte typer rettsstiftelser skal kun kunne sendes inn av en spesifikk aktør, slik som Statens Innkrevingssentral, kontroll av dette er ikke implementert i milepæl 3.
+Dokumentasjon av rettstypene finnes i UML-modellen for innsending.
 
 Innsendingsgrensesnittet krever at XML-delen tilhørende BIDXML kan valideres mot XSD for namespacet for innsendingsskjemaet. Dette må oppgis på standardisert vis med namespacehenvisning i XML-dokumentet. Det kreves også at XSL-delen tilhørende BIDXML kan valideres mot godkjente versjoner av XSL transformasjonen. Innpakket XSL må således være binært identisk med en versjon som er publisert av Kartverket.
 
