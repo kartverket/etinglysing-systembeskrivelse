@@ -196,7 +196,7 @@ Systemet implementerer en asynkron prosessflyt, slik at tinglysingskallet kun si
 
 ## 5. Funksjonalitet og begrensninger 
 
-Det finnes 9 typer rettsstiftelser som skal kunne sendes inn av eksterne aktører i første versjon av systemet tilgjengelig for elektronisk innsending:
+Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av eksterne aktører:
 
 * Eierskifte matrikkelenhet
 * Overdragelse av festerett
@@ -204,9 +204,13 @@ Det finnes 9 typer rettsstiftelser som skal kunne sendes inn av eksterne aktøre
 * Pant
 * Annen heftelse
 * Sletting
-* Tvangsforretning
-* Anmerkning på person
+* Transport, herunder Massetransport
+* Nedkvittering
+* Tinglysing på ny
 * Prioritetsbestemmelse for dokumentnummer
+* Prioritetsbestemmelse for ikke tinglyst dokument
+* Tvangsforretning (kun enkelte aktører)
+* Anmerkning på person (kun enkelte aktører)
 
 Dokumentasjon av rettstypene finnes i UML-modellen for innsending. Implementasjonen av hver rettstype er ikke komplett, det vil si at det kan være valideringsregler og annen forretningslogikk som vil komme på plass senere. Det samme gjelder valideringslogikk rundt selve forsendelsen. Enkelte typer rettsstiftelser skal kun kunne sendes inn av en spesifikk aktør, slik som Statens Innkrevingssentral, kontroll av dette er ikke implementert i milepæl 3.
 
