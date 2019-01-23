@@ -123,8 +123,15 @@ Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne o
 ![Figur 2 Forsendelsesstatus](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/forsendelse2.png)
 
 Tjenestene for validering og tinglysing returnerer en forsendelsesstatus. 
-For validering vil behandlingsinformasjon være satt dersom det ble funnet feil, mens tinglysingsinformasjon aldri vil være satt. 
-For meldinger som er sendt til tinglysing og som er mottatt av systemet, kan en oppdatert forsendelsesstatus hentes løpende gjennom tjenesten hentStatus. Denne statusen hentes med den innsendingId man fikk tilordnet gjennom at meldingen ble sendt til tinglysingen med sendTilTinglysing. Feltene saksstatus og behandlingsutfall angir saksgangen for innsendte meldinger.
+
+For validering vil behandlingsinformasjon være satt dersom det ble funnet avvik, mens tinglysingsinformasjon aldri vil være satt. 
+Eventuell behandlingsinformasjon vil inneholde et eller flere kontrollresultater som beskriver avvik funnet. 
+Kontrollresultatene kan gjennomgås for å vurdere hva som vil kunne skje dersom saken sendes til tinglysing.
+
+Validering er å anse som informasjon, og er ingen garanti for at det samme vil skje ved innsending til tinglysing. 
+Eksempelvis kan omstendighetene ha endret seg mellom validering og tinglysing, slik at noe som har validert uten avvik vil avvises ved tinglysing. 
+Løsninger som benytter validering må altså ta høyde for at resultatet ved tinglysing kan bli noe annet enn valideringen tilsa, en forsendelse kan bli avvist selv om valideringen ikke returnerte noen kontrollresultater.
+
 For elektronisk innsendte meldinger er følgende verdier relevante:
 
 | Saksstatus | Behandlingsutfall | Forklaring |
@@ -139,6 +146,22 @@ For elektronisk innsendte meldinger er følgende verdier relevante:
 Hvis dokumentene i meldingen er avvist vil statusfeltene saksstatus og behandlingsutfall i forsendelsesstatus inneholde den overordnede tilstanden, mens behandlingsinformasjon vil inneholde kontrollresultat med begrunnelse for avvisningen i form av strukturert informasjon med koder, men også med lesbare tekster.
 
 Dersom dokumentene i meldingen er blitt registrert i grunnboken inneholder forsendelsesstatus blant annet informasjon om registreringstidspunkt (prioritet), samt tildelte dokumentnummer og rettsstiftelsesnummer. Disse er angitt med en kobling til innsenders oppgitte referanser for hhv. dokumentene og rettsstiftelsene. Når dokumentene i meldingen er tinglyst gjøres det også tilgjengelig et sett av signerte grunnboksutskrifter for de registerenheter som er berørte av denne tinglysingen.
+
+#### Kontrollresultater
+
+Kontrollresultater kan ha følgende utfall:
+
+| Utfall | Forklaring |
+|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| IKKE_GODKJENT | Kontrollen er ikke godkjent. |
+| UAVKLART | Det må vurderes manuelt av en saksbehandler om kontrollen kan godkjennes eller ikke. |
+
+* Dersom man får minst ett IKKE_GODKJENT kontrollresultat ved validering er sjansen stor for at forsendelsen vil avvises ved innsending til tinglysing.
+* Dersom man får minst ett IKKE_GODKJENT kontrollresultat ved innsending til tinglysing vil forsendelsen bli avvist.
+* Dersom man får minst ett UAVKLART kontrollresultat ved validering og ingen IKKE_GODKJENT er sjansen stor for at forsendelsen vil gå til manuell behandling ved innsending til tinglysing.
+* Dersom man får minst ett UAVKLART kontrollresultat ved innsending til tinglysing og ingen IKKE_GODKJENT vil forsendelsen gå til manuell behandling.
+
+Dokumentene i en forsendelse som går til manuell behandling vil være registrert i grunnboken. Den manuelle behandlingen gir som resultat at dokumentene i forsendelsen enten blir tinglyst eller nektet.
 
 ### Feilhåndtering
 
