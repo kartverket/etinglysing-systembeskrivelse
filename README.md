@@ -138,10 +138,10 @@ For elektronisk innsendte meldinger er følgende verdier relevante:
 |---------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | MOTTATT |	UAVKLART | Meldingen er mottatt og venter på registrering i grunnboken. Registrering av meldinger skjer i rekkefølge i henhold til tildelt registreringstidspunkt. |
 | UNDER_BEHANDLING | UAVKLART | Meldingen er registrert i grunnboken og etterfølgende meldinger vil ta hensyn til den, men dens endelige behandlingsutfall er ikke avgjort. Meldingen kan enten bli tinglyst eller nektet. |
-| AVSLUTTET | AVVIST | Meldingen er avvist og ble ikke registret i grunnboken |
+| AVSLUTTET | AVVIST | Meldingen er avvist og ble ikke registrert i grunnboken |
 | AVSLUTTET | TINGLYST | Meldingen er tinglyst i grunnboken. |
 | AVSLUTTET | NEKTET | Meldingen er nektet i grunnboken. |
-| UKJENT_TEKNISK_FEIL | UAVKLART | Meldingen har støtt på en ukjent teknisk feil og venter på videre avklaring. Behandling av meldingen vil fortsette fra forrige tilstand på et senere tidspunkt. <ul><li>Hvis forrige status var MOTTATT er meldingen ennå ikke registret i grunnboken og vil bli forsøkt registret i grunnboken på et senere tidspunkt.</li><li>Hvis forrige status var UNDER_BEHANDLING er meldingen allerede registret i grunnboken og videre behandling vil skje på et senere tidspunkt.</li></ul> |
+| UKJENT_TEKNISK_FEIL | UAVKLART | Meldingen har støtt på en ukjent teknisk feil og venter på videre avklaring. Behandling av meldingen vil fortsette fra forrige tilstand på et senere tidspunkt. <ul><li>Hvis forrige status var MOTTATT er meldingen ennå ikke registrert i grunnboken og vil bli forsøkt registrert i grunnboken på et senere tidspunkt.</li><li>Hvis forrige status var UNDER_BEHANDLING er meldingen allerede registrert i grunnboken og videre behandling vil skje på et senere tidspunkt.</li></ul> |
  
 Hvis dokumentene i meldingen er avvist vil statusfeltene saksstatus og behandlingsutfall i forsendelsesstatus inneholde den overordnede tilstanden, mens behandlingsinformasjon vil inneholde kontrollresultat med begrunnelse for avvisningen i form av strukturert informasjon med koder, men også med lesbare tekster.
 
