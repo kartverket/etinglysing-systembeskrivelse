@@ -482,36 +482,23 @@ For følgebrevet som skal signeres med brukerstedssertifikat så er det ikke noe
  
 ## 7. Hvilke identifikasjonsnumre følger med inn til signaturkontroll
 
-Identifikasjonsnumre som kan utledes fra sertifikatet enten gjennom oppslag i BankId sin VA tjeneste, eller hentet ut fra subjekt feltet for brukerstedssertifikat, følger som hovedregel med inn i signaturkontrollen, men det finnes noen unntak for å forhindre at signaturer fra brukersteder som tilrettelegger for signering følger med inn i denne kontrollen. 
-
-Et eksempel på en signatur for brukersted som man ikke ønsker å ha med inn i signaturkontrollen er et brukersted som har tilrettelagt for signering av et dokument, for eksempel en nettbank. Som hovedregel (dette er nok implementasjonsspesifikt for de forskjellige leverandørene) så vil det for et slikt dokument alltid finnes to signaturer i dokumentet. En for den personen som har signert, samt en for brukerstedet som har tilrettelagt for denne signeringen, for eksempel bankens brukerstedssertifikat. Den påfølgende tabellen viser ulike type kombinasjoner av hva vi tillater i forhold til hvem som teknisk kan signere, samt hvilke identifikasjonsnumre fra disse tekniske signeringene som følger med inn til signaturkontroll.
+Identifikasjonsnumre som kan utledes fra sertifikatet enten gjennom oppslag i BankId sin VA tjeneste, eller hentet ut fra subjekt feltet for brukerstedssertifikat, følger med inn i signaturkontrollen. I tillegg følger identifikasjonsnummeret fra følgebrevet med inn i signaturkontroll for hvert dokument. 
 
 Vi bruker følgende konvensjoner:
 
 **Rolle(B)** eller **Rolle(P)** for å betegne en rolle som signerer, for eksempel **Selger** og **B** for brukerstedssertifikat og **P** for personsertifikat. Rolle representerer et identifikasjonsnummer, når vi skriver **Selger** så mener vi identifikasjonsnummeret som tilhører denne rollen.
 
-## Enkelt pantedokument
-
-Pantedokument som signeres av to rettighetshavere **Eier** og **Ektefelle** i to forskjellige nettbanker, **DnB** og **Nordea** til registerenheten som skal pantsettes, innsendt av **Megler**. Det er tinglyst en urådighet på registerenheten med **Megler** som rettighetshaver.
-
-| Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
-|-------------------------|-------------------------|-------------------------|
-| Pantedokument | Eier(P), Ektefelle(P), DnB(B), Nordea(B) | Eier, Ektefelle |
-| Følgebrev | Megler(B) | Megler |
-
-Identifikasjonsnummer til Nordea og DnB som brukersteder for signeringen følger ikke for pantedokumentet i dette tilfellet.
-
 ### Dokumentpakke
 
-Dokumentpakke, sletting av gammelt pant i Dnb, eierskifte med Selger og Kjøper, pant for ny eier i Skandiabanken, sendt inn av Megler.
+Dokumentpakke, sletting av gammelt pant i DnB, eierskifte med Selger og Kjøper, pant for ny eier i Skandiabanken, sendt inn av Megler.
 Sletting signeres av DnB med brukerstedssertifikat. Selger signerer Eierskifte i eBoks sendt fra meglerens system, ny eier signerer pantedokument i Skandiabankens nettbank. Megler samler inn dokumenter, signerer følgebrev med brukerstedssertifikat og sender inn.
 
 
 | Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
 |-------------------------|-------------------------|-------------------------|
-| Sletting | Dnb(B) | Dnb |
-| Eierskifte | Selger(P), eBoks(B) | Selger |
-| Pantedokument | Kjøper(P), Skandiabanken(B) | Kjøper |
+| Sletting | DnB(B) | DnB, Megler |
+| Eierskifte | Selger(P), eBoks(B) | Selger, eBoks, Megler |
+| Pantedokument | Kjøper(P), Skandiabanken(B) | Kjøper, Skandiabanken, Megler |
 | Følgebrev | Megler(B) | Megler |
 
 ### Sletting med følgebrev
@@ -520,27 +507,16 @@ DnB sender inn en sletting signert med brukerstedssertifikat, det samme sertifik
 
 | Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
 |-------------------------|-------------------------|-------------------------|
-| Sletting | Dnb(B) | DnB |
+| Sletting | DnB(B) | DnB |
 | Følgebrev | DnB(B) | DnB |
 
 #### Sletting og følgebrev sammen
 
-Nordea signerer sletting og følgebrev sammen
+DnB signerer sletting og følgebrev sammen
 
 | Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
 |-------------------------|-------------------------|-------------------------|
-| Sletting og Følgebrev (Dokument og Følgebrev sammen) | Dnb(B) | DnB |
-
-#### Sletting signert av ansatt
-
-Sletting signeres av Ansatt i Nordea med personlig BankId, følgebrev signeres av Nordea.
-
-| Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
-|-------------------------|-------------------------|-------------------------|
-| Sletting | Ansatt(P), DnB(B) | Ansatt |
-| Følgebrev | DnB(B) | DnB |
-
-Dette eksempelet viser at vi ikke formidler brukerstedets identifikasjonsnummer når det opptrer sammen med en personlig signatur (Multisigned SDO). I de tilfellene så vi kun identifikasjonsnummer for personer formidles inn til signaturkontroll. DnB som rettighetshaver kommer med fordi følgebrevet er signert av DnB. 
+| Sletting og Følgebrev (Dokument og Følgebrev sammen) | DnB(B) | DnB | 
  
 ## 8. Hvordan behandles signaturene i et signert dokument
 
