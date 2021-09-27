@@ -6,7 +6,7 @@
 
 ## Innledning
 
-Løsningen for elektronisk tinglysing bygger videre på de konsepter og teknologier som er anvendt for Ny grunnbok, og tilbyr et nytt Web Service basert API for elektronisk innsending av dokumenter til tinglysing. Grensesnittet tilbyr tjenester for validering av dokumenter før innsending, tjenester for innsending til tinglysing samt tjenester for uthenting av tinglysingsresultat. I tillegg tilbys den funksjonalitet som ble introdusert med Ny grunnbok.
+Kartverkets løsning for elektronisk innsending til tinglysing tilbyr et Web Service basert API for elektronisk innsending av dokumenter til tinglysing. Grensesnittet tilbyr tjenester for validering av dokumenter før innsending, tjenester for innsending til tinglysing samt tjenester for uthenting av tinglysingsresultat.
 
 ### Innholdsfortegnelse
 
@@ -51,9 +51,9 @@ Det signerte følgebrevet og de signerte dokumentene legges i en åpen meldingss
 
 ### Hvem signerer dokument og følgebrev
 
-En melding må alltid inneholde et en liste av dokumenter sammen med et følgebrev. Normalt så signeres dette hver for seg, av forskjellige parter. Typisk vil dokumentet signeres av den som får en ny heftelse i rettsstiftelsen, for eksempel rettighetshaver i en Leierett som pantsettes. Denne rettighetshaveren må signere når et pant i en slik rettighet skal tinglyses. Den som sender pantedokumentet sammen med følgebrevet, typisk en finansinstitusjon, vil normalt signere dette følgebrevet. Følgebrevet skal signeres med et brukerstedssertifikat.  
+En melding må alltid inneholde en liste av dokumenter sammen med et følgebrev. Normalt så signeres dette hver for seg, av forskjellige parter. Typisk vil dokumentet signeres av den som får en ny heftelse i rettsstiftelsen, for eksempel rettighetshaver i en Leierett som pantsettes. Denne rettighetshaveren må signere når et pant i en slik rettighet skal tinglyses. Den som sender pantedokumentet sammen med følgebrevet, typisk en finansinstitusjon, vil normalt signere dette følgebrevet. Følgebrevet skal signeres med et brukerstedssertifikat.  
 
-I dette eksempelet så er det to ulike parter som signerer. I et annet tilfelle, for eksempel når man skal slette et pant, så kan parten som skal signere dokument og følgebrev være den samme. Vi har derfor tilrettelagt for at man skal kunne elektronisk signere dokument og følgebrev. Det er ikke alltid dette gir mening, men i de tilfeller der organisasjon kan signere og dette er den samme part som signerer følgebrevet, så kan det gir færre signeringer og dermed også reduserte kostnader.
+I dette eksempelet så er det to ulike parter som signerer. I et annet tilfelle, for eksempel når man skal slette et pant, så kan parten som skal signere dokument og følgebrev være den samme. Vi har derfor tilrettelagt for at man skal kunne elektronisk signere dokument og følgebrev samlet. Det er ikke alltid dette gir mening, men i de tilfeller der organisasjon kan signere og dette er den samme part som signerer følgebrevet, så kan det gir færre signeringer og dermed også reduserte kostnader.
 
 I de fleste tilfeller så vil alle identer for person og juridisk person som er benyttet for å signere et dokument eller følgebrev sendes med som identifikasjonsnummer for det som brukes i signaturkontroll. Det finnes noen unntak. Se seksjon om signering for ytterligere beskrivelse.
 
@@ -84,7 +84,7 @@ Det er implementert tre funksjoner for innsending. Disse kan brukes uavhengig av
 
 Signerte data vil kunne brukes i tjenestene for å validere og å sende melding til tinglysing i produksjon og i test. For signerte meldinger i test kommuniserer grunnboksystemet med BankID i test, og aksepterer meldinger signert av sertifikater utstedt fra BankID test CA. For produksjon aksepterer vi signerte meldinger signert av BankID CA.
 
-Følgende tjenester tilbys, som WebService i test, men bare valider er tilgjengelig i produksjon. For å sende data til tinglysingen så må innsender benytte Altinn Formidlingstjeneste. Payloaden som sendes med til Altinn er den samme som i Webtjenestene. Dette er derfor å regne som et rent transportanliggende. Alle tre abstraksjonene er modellert også i formidlingstjenesten så dette bør oppleves som ganske likt.
+Følgende tjenester tilbys, som WebService i test, men bare valider er tilgjengelig som WebService i produksjon. For elektronisk innsending til tinglysing må innsender benytte Altinn Formidlingstjeneste. Payloaden som sendes med til Altinn er den samme som i Webtjenestene. Dette er derfor å regne som et rent transportanliggende. Alle tre abstraksjonene er modellert også i formidlingstjenesten så dette bør oppleves som ganske likt.
 
 #### valider
 
@@ -96,13 +96,13 @@ Tjenesten vil for signerte meldinger slå opp data samt validere mot eId-leveran
 
 #### sendTilTinglysing
 
-En usignert (i test) eller signert melding (test og prod) sendes til behandling i tinglysing. Man sender med en intern referanse, forsendelsesreferanse som bruker som referanse i avleverende fagsystem. Hvis meldingen blir lagret i Kartverkets systemer så vil den intern bli tilordnet en innsendingId. Det er denne innsendingId man bruker når man skal hente informasjon om meldingen. Signerte meldinger kan sendes til tinglysing både i test og i produksjon, mens usignerte meldinger kan sendes til tinglysing kun i test. I forkant kan det være nyttig å ha testet at meldingen validerer. Det vil kunne være de samme feilene som propageres fra sendTilTinglysing som fra valider, gitt at valideringen feiler på valideringer på tidspunktet den blir validert ved mottak.
+En usignert (i test) eller signert melding (i test og prod) sendes inn elektronisk til tinglysing. Man sender med en intern referanse, forsendelsesreferanse, som kan brukes som referanse i avleverende fagsystem. Hvis meldingen blir lagret i Kartverkets systemer så vil den internt bli tilordnet en innsendingId. Det er denne innsendingId man bruker når man skal hente informasjon om meldingen. Signerte meldinger kan sendes til tinglysing både i test og i produksjon, mens usignerte meldinger kan sendes til tinglysing kun i test. I forkant kan det være nyttig å ha testet at meldingen validerer. Det vil kunne være de samme feilene som propageres fra sendTilTinglysing som fra valider, gitt at valideringen feiler på valideringer på tidspunktet den blir validert ved mottak.
 
 Tjenesten vil i produksjon slå opp data samt validere mot eId-leverandørers produksjonssystemer. Tjenesten returnerer en forsendelsesstatus som inneholder informasjon om mottatt melding, eventuelle avvisninger samt en unik innsendingId hvis Kartverket har akseptert å motta meldingen videre prosessering.
 
 #### hentStatus
 
-Etter at en melding er mottatt av systemet kan man hente oppdatert behandlingsstatus for den innsendte meldingen. Input til denne tjenesten er en inndendingId som man har fått tilbake etter at man har sendt en melding med minst ett dokument til tinglysing som Kartverket har akseptert.
+Etter at en melding er mottatt av systemet kan man hente oppdatert behandlingsstatus for den innsendte meldingen. Input til denne tjenesten er en innsendingId som man har fått tilbake etter at man har sendt en melding med minst ett dokument til tinglysing som Kartverket har akseptert.
 
 #### Sekvensdiagram
  
@@ -116,7 +116,18 @@ Dokumenter som ønskes tinglyst som en enhet samles som en signert eller en usig
 
 Følgebrevet inneholder også innsenders identifikasjonsnummer, og det valideres at innsender er en eksisterende person eller organisasjon. Innsender må signere på følgebrevet med sitt brukerstedssertifikat. 
 
-Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne opprettes og signeres uavhengig av grunnboksystemet, dersom innsender har tilstrekkelig informasjon. I tillegg skal potensielt flere dokumenter signeres av rettighetshavere, vi må derfor ta høyde for at dokumenter kan eksistere i signert form i flere utgaver. Blant annet må innsender ha informasjon om koder som skal anvendes i dokumentene som skal tinglyses. Informasjon om koder er statisk og vil kunne hentes på forhånd gjennom et avgivergrensensitt, eller kopieres inn og vedlikeholdes i et fagsystem på utsiden av kartverket. Innsendte koder som ikke kan oversettes til koder systemet kjenner igjen vil forårsake systemfeil. 
+Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne opprettes og signeres uavhengig av grunnboksystemet, dersom innsender har tilstrekkelig informasjon. I tillegg skal potensielt flere dokumenter signeres av rettighetshavere, vi må derfor ta høyde for at dokumenter kan eksistere i signert form i flere utgaver. Blant annet må innsender ha informasjon om koder som skal anvendes i dokumentene som skal tinglyses. Informasjon om koder er statisk og vil kunne hentes på forhånd gjennom avgivergrensesnittet, eller kopieres inn og vedlikeholdes i et fagsystem på utsiden av kartverket. Innsendte koder som ikke kan oversettes til koder systemet kjenner igjen vil forårsake systemfeil. 
+
+#### Vedlegg
+
+En melding til tinglysing kan også inneholde vedlegg til dokumentene i meldingen (fra versjon 3.16). Vedlegg legges i forsendelsen på samme måte enten meldingen er signert eller usignert, og hvert vedlegg må ha en vedleggsreferanse som er unik innenfor meldingen, samt en base64-encodet pdf.
+
+Følgebrevet må inneholde metadata for hvert vedlegg, der disse metadata kobler et vedlegg til et dokument og til en eller flere vedleggskategorier.
+
+Vedlegg metadata inneholder også digest for den base64-encodede pdf-en (påkrevd kun ved signert melding, men valideres dersom finnes ved usignert melding), samt en digest-algoritme. Oppgitt digest blir kontrollert mot vedlegget via angitt algoritme. Dette er tilsvarende som digest for dokumentene i følgebrevets dokumentrekkefølge. Grunnlaget for beregningen er base64-formatet av vedlegget, slik det er innsendt i pdfVedlegg-elementet.
+
+Signeringen av følgebrevet inkludert vedlegg metadata innebærer at innsender bekrefter ‘rett kopi’ av vedleggene. For øvrig henvises det til [vedleggsveilederen](https://github.com/kartverket/etinglysing-vedlegg/) for mer informasjon om vedlegg.
+
 
 #### Forsendelsesstatus
 
@@ -162,6 +173,15 @@ Kontrollresultater kan ha følgende utfall:
 * Dersom man får minst ett UAVKLART kontrollresultat ved innsending til tinglysing og ingen IKKE_GODKJENT vil forsendelsen gå til manuell behandling.
 
 Dokumentene i en forsendelse som går til manuell behandling vil være registrert i grunnboken. Den manuelle behandlingen gir som resultat at dokumentene i forsendelsen enten blir tinglyst eller nektet.
+
+### Link til utskrift
+
+Funksjonaliteten 'Link til utskrift' ved elektronisk innsending innebærer en overgang fra at en bekreftet utskrift som genereres ved tinglysing 
+returneres som en signert PDF (SDO), til at det returneres en link som gir tilgang til den bekreftede utskriften som ligger lagret på Kartverkets servere.
+
+I en overgangsperiode fra mai og ut oktober 2021 kan aktørene selv styre om det ønskes returnert SDO _eller_ link, ved å sette flagget linkTilUtskrifter i forsendelsen. Ved SDO returneres elementet signerteGrunnboksutskrifter i Forsendelsesstatus / tinglysingsinformasjon, mens ved link returneres elementet grunnboksutskrifter.
+
+Etter denne perioden har flagget ingen effekt, og kun link vil returneres.
 
 ### Feilhåndtering
 
@@ -226,7 +246,7 @@ Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av ek
 * Eierskifte borettslagsandel
 * Pant
 * Annen heftelse
-* Sletting
+* Sletting, herunder begrenset/delvis sletting
 * Transport, herunder massetransport
 * Nedkvittering
 * Tinglysing på ny
@@ -830,7 +850,10 @@ Dersom en eller flere av sjekkene som blir utført gir svar at systemet er nede 
  
 ## 11. Endepunkter for test og produksjon
 
-Dette avsnittet vil gi en oversikt over endepunkter for produksjon, betatestmiljøet og for testmiljøet vårt (EtglTest), både for direkte aksess til Innsendingstjenestene våre og til Altinn sine endepunkter.
+Dette avsnittet vil gi en oversikt over endepunkter for produksjon, samt for de to testmiljøene etgltest (produksjonsversjon) og betatest (kommende versjon), både for direkte aksess til Innsendingstjenestene våre og til Altinn sine endepunkter.
+
+For beskrivelse av tjenestene som tilbys er innsending og validering dekket av inneværende dokument, mens en generell beskrivelse
+av øvrige tjenester, som oppslagstjenester og endringslogg, finnes [her](https://github.com/kartverket/etinglysing-tjenester). 
 
 ### Forbehold 
 
@@ -843,44 +866,15 @@ Testsystemene representerer et system under utvikling der de ulike deler av syst
 
 https://www.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
 
+På produksjonssystemet er denne vanligvis ikke i bruk, da innsending skjer via Altinns formidlingstjeneste, som beskrevet i dette dokumentet.
+
 #### Valideringstjeneste
 
 https://www.grunnbok.no/grunnbok/wsapi/v2/ValideringServiceWS
 
-Merk; adressen over refererer til en kjørende tjeneste for dagens produksjon som skal erstattes av den nye tjenesten.  Den eksisterende tjenesten vil kjøre i produksjon frem til 18.04.2017 06:00. Etter dette vil den erstattes av den nye tjenesten klokken 08:00, men det betyr også at www.grunnbok.no bytter IP adresse til ny server i dette tidsrommet. Adressen vil da endres fra 159.162.103.93 til 159.162.103.105.
+#### Teknisk dokumentasjon alle tjenester
 
-Brannmurregler med mer må ta høyde for denne endringen hos eksterne parter som skal integrere med Kartverket.
-
-For å unngå dette problemet anbefaler vi alle å benytte de nye adressene 
-
-https://innsyn.grunnbok.no eller https://innsending.grunnbok.no
-
-Som base URL for disse tjenestene. Det vil forenkle overgangen der vi kan teste infrastruktur i god tid før produksjon.
-
-Oppsummert:
-
-https://innsyn.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
-Skal brukes til validering, er tilgjengelig før produksjonssetting fra 29.03.2017
-
-https://innsending.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
-For de som skal bruke WS for innsending (krever egen avtale), tilgjengelig før produksjonssetting fra 29.03.2017.
-
-De som skal bruke WS for innsending må bruke https://innsending.grunnbok.no , denne tjenesten vil ikke være tilgjengelig på www.grunnbok.no.
-
-#### Innsynstjenester
-
-https://innsyn.grunnbok.no
-
-Se dokumentasjon under:
-
-https://innsyn.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for 
-oversikt over alle endepunkter for innsyn.
-Disse tjenestene vil også være tilgjengelig på https://www.grunnbok.no, men ikke før produksjonsdagen slik som beskrevet over.
-
-#### Endringslogg
-
-https://innsyn.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for oversikt over alle endepunkter for endringslogg og nedlasting.
-Disse tjenestene vil også være tilgjengelig på https://www.grunnbok.no, men ikke før produksjonsdagen slik som beskrevet over.
+https://www.grunnbok.no/grunnbok/dokumentasjon.html
 
 #### Endepunkter Altinn
 
@@ -899,28 +893,21 @@ Disse tjenestene vil også være tilgjengelig på https://www.grunnbok.no, men i
 
 
  
-### Testmiljø - EtglTest
+### Testmiljø - etglTest
 
 #### Innsendingstjeneste
 
 https://etgltest.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
 
+I test er elektronisk innsending tilgjengelig både direkte via WS og via Altinns formidlingstjeneste.
+
 #### Valideringstjeneste
 
 https://etgltest.grunnbok.no/grunnbok/wsapi/v2/ValideringServiceWS
 
-#### Innsynstjenester
+#### Teknisk dokumentasjon alle tjenester
 
-https://etgltest.grunnbok.no
-
-Se dokumentasjon under:
-https://etgltest.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for oversikt over alle endepunkter for innsyn
-
-#### Endringslogg
-
-https://etgltest.grunnbok.no
-Se dokumentasjon under:
-https://etgltest.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for oversikt over alle endepunkter for endringslogg og nedlasting
+https://etgltest.grunnbok.no/grunnbok/dokumentasjon.html
 
 #### Endepunkter Altinn
 
@@ -938,28 +925,21 @@ https://etgltest.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for over
 
 
 
-### Testmiljø - Betatest
+### Testmiljø - betatest
 
 #### Innsendingstjeneste
 
 https://betatest.grunnbok.no/grunnbok/wsapi/v2/InnsendingServiceWS
 
+I test er elektronisk innsending tilgjengelig både direkte via WS og via Altinns formidlingstjeneste.
+
 #### Valideringstjeneste
 
 https://betatest.grunnbok.no/grunnbok/wsapi/v2/ValideringServiceWS
 
-#### Innsynstjenester
+#### Teknisk dokumentasjon alle tjenester
 
-https://betatest.grunnbok.no
-
-Se dokumentasjon under:
-https://betatest.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for oversikt over alle endepunkter for innsyn
-
-#### Endringslogg
-
-https://betatest.grunnbok.no
-Se dokumentasjon under:
-https://betatest.grunnbok.no/grunnbok/wsapi/v2/dokumentasjon/index.html for oversikt over alle endepunkter for endringslogg og nedlasting
+https://betatest.grunnbok.no/grunnbok/dokumentasjon.html
 
 #### Endepunkter Altinn
 
