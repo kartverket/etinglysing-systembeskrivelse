@@ -43,11 +43,18 @@ Signeringsteknologien sikrer integriteten til innholdet, det vil ikke være muli
 
 Beskrivelse av hvordan man kan sette sammen en signert melding basert på det resultatet man får når man signerer noe med BankId er beskrevet i seksjonen Innsending av signerte dokumenter.
 
+### Vedlegg 
+
+For enkelte dokumenter vil det være nødvendig med informasjon i tillegg til den strukturerte informasjonen som finnes i selve dokumentet, for at dokumentet skal kunne tinglyses. 
+
+Slik tilleggsinformasjon kan sendes med i meldingen i form av vedlegg til dokumentet.
+
 ### Følgebrev 
 
-Før innsending må innsender lage et følgebrev som ved hjelp av interne dokumentreferanser i meldingen lister opp alle dokumenter som meldingen inneholder. Følgebrevet angir dermed entydig hvilke dokumenter som inngår i meldingen uten at dokumentene selv må være en del av følgebrevet. Følgebrevet legges i en digital struktur som signeres av innsender. 
+Før innsending må innsender lage et følgebrev som ved hjelp av interne referanser i meldingen lister opp alle dokumenter og eventuelle vedlegg som meldingen inneholder. Følgebrevet angir dermed entydig 
+hvilke dokumenter og vedlegg som inngår i meldingen uten at disse selv må være en del av følgebrevet. Følgebrevet legges i en digital struktur som signeres av innsender. 
 
-Det signerte følgebrevet og de signerte dokumentene legges i en åpen meldingsstruktur som sendes til tinglysing. Rekkefølgen på dokumentene i meldingen må være den samme som angitt i følgebrevet. 
+Det signerte følgebrevet, de signerte dokumentene samt eventuelle vedlegg legges i en åpen meldingsstruktur som sendes til tinglysing. Rekkefølgen på dokumentene i meldingen må være den samme som angitt i følgebrevet. 
 
 ### Hvem signerer dokument og følgebrev
 
@@ -59,9 +66,6 @@ I de fleste tilfeller så vil alle identer for person og juridisk person som er 
 
 Se for øvrig beskrivelsen [Signatur Fullmakt og Vitner](http://www.kartverket.no/eiendom/signatur-fullmakt-og-vitner/) for en mer utførlig beskrivelse av dette konseptet.
 
-### Vedlegg 
-
-Dokumenter som krever vedlegg for å kunne tinglyses kan ikke sendes inn elektronisk, dette er foreløpig ikke støttet i løsningen.
 
 ## 2. Innsendingsgrensesnitt
 
@@ -120,7 +124,7 @@ Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne o
 
 #### Vedlegg
 
-En melding til tinglysing kan også inneholde vedlegg til dokumentene i meldingen (fra versjon 3.16). Vedlegg legges i forsendelsen på samme måte enten meldingen er signert eller usignert, og hvert vedlegg må ha en vedleggsreferanse som er unik innenfor meldingen, samt en base64-encodet pdf.
+En melding til tinglysing kan fra versjon 3.16 også inneholde vedlegg til dokumentene i meldingen. Vedlegg legges i forsendelsen på samme måte enten meldingen er signert eller usignert, og hvert vedlegg må ha en vedleggsreferanse som er unik innenfor meldingen, samt en base64-encodet pdf.
 
 Følgebrevet må inneholde metadata for hvert vedlegg, der disse metadata kobler et vedlegg til et dokument og til en eller flere vedleggskategorier.
 
