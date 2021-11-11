@@ -245,21 +245,23 @@ Systemet implementerer en asynkron prosessflyt, slik at tinglysingskallet kun si
 
 Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av eksterne aktører:
 
-* Eierskifte matrikkelenhet
-* Overdragelse av festerett
-* Eierskifte borettslagsandel
-* Pant
-* Annen heftelse
-* Sletting, herunder begrenset/delvis sletting
-* Transport, herunder massetransport
-* Nedkvittering
-* Tinglysing på ny
-* Prioritetsbestemmelse for dokumentnummer
-* Prioritetsbestemmelse for ikke tinglyst dokument
-* Tvangsforretning (kun enkelte aktører)
-* Anmerkning på person (kun enkelte aktører)
+* Eierskifte matrikkelenhet (HJ_HJG)
+* Overdragelse av festerett med og uten bygning (TF_OMB, TF_OUB)
+* Eierskifte borettslagsandel (BH_HJA)
+* Pantedokument, herunder bytte av bank (OB_PDO, OB_PDB)
+* Annen heftelse, kun urådighet (AH_URK)
+* Sletting, herunder begrenset/delvis sletting (SL_SLE)
+* Transport, herunder massetransport (TR_TRA, TR_TRP, TR_TAS, TR_MAS, TR_FUS)
+* Nedkvittering (NE_NEK)
+* Tinglysing på ny (TN_TPN)
+* Prioritetsbestemmelse for dokumentnummer, herunder 'internvikelse' i samme forsendelse (PR_PRB, PR_PRV)
+* Prioritetsbestemmelse for ikke tinglyst dokument (PB_PRB)
+* Tvangsforretning (kun enkelte aktører) (TV_UTL, TV_ARR)
+* Anmerkning på person (kun enkelte aktører) (ET_KKM)
 
-Dokumentasjon av rettstypene finnes i UML-modellen for innsending.
+I tillegg kommer rettsstiftelser som kun kan sendes inn fra matrikkelen.
+
+Dokumentasjon av rettsstiftelsestypene finnes i UML-modellen for innsending.
 
 Innsendingsgrensesnittet krever at XML-delen tilhørende BIDXML kan valideres mot XSD for namespacet for innsendingsskjemaet. Dette må oppgis på standardisert vis med namespacehenvisning i XML-dokumentet. Det kreves også at XSL-delen tilhørende BIDXML kan valideres mot godkjente versjoner av XSL transformasjonen. Innpakket XSL må således være binært identisk med en versjon som er publisert av Kartverket.
 
