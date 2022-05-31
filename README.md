@@ -85,7 +85,7 @@ BankID eller med andre eId-leverandører som støtter BIDXML. Presentasjonsmalen
 som ligger i XML strukturen vil bli vist, således vil samtlige av elementene i det som signeres av rettighetshaver ha 
 blitt forevist den rettighetshaveren som har signert.
 
-**Som kontaktpunkt for BankID henviser vi til [BankId Bedrift](https://www.bankid.no/For-partnere/)**
+**Som kontaktpunkt for BankID henviser vi til [BankId Bedrift](https://www.bankid.no/bedrift/)**
 
 Se også egen seksjon litt senere: Innsending av signerte dokumenter for en beskrivelse av dette.
 
@@ -570,8 +570,8 @@ For følgebrevet som skal signeres med virksomhetssertifikat så er det ikke noe
 Identifikasjonsnumre som hentes ut fra signaturene på dokumentet følger med inn i signaturkontrollen. 
 I tillegg følger identifikasjonsnummeret fra følgebrevet med inn i signaturkontroll for hvert dokument. 
 
-I signaturkontrollen sjekkes det i henhold til spesifikke regler for hver type rettsstiftelse i dokumentet at de påkrevde rettighetshavere har
-signert dokumentet. Det aksepteres overflødige signaturer på dokumentet.
+I signaturkontrollen sjekkes det i henhold til spesifikke regler for hver type rettsstiftelse i dokumentet, at de påkrevde signaturene
+som representerer rettighetshaverne har signert dokumentet. Det aksepteres overflødige signaturer på dokumentet.
 
 ### Eksempler
 
