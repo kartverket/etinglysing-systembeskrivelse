@@ -58,11 +58,16 @@ Det signerte følgebrevet, de signerte dokumentene samt eventuelle vedlegg legge
 
 ### Hvem signerer dokument og følgebrev
 
-En melding må alltid inneholde en liste av dokumenter sammen med et følgebrev. Normalt så signeres dette hver for seg, av forskjellige parter. Typisk vil dokumentet signeres av den som får en ny heftelse i rettsstiftelsen, for eksempel rettighetshaver i en Leierett som pantsettes. Denne rettighetshaveren må signere når et pant i en slik rettighet skal tinglyses. Den som sender pantedokumentet sammen med følgebrevet, typisk en finansinstitusjon, vil normalt signere dette følgebrevet. Følgebrevet skal signeres med et brukerstedssertifikat.  
+En melding må alltid inneholde en liste av dokumenter sammen med et følgebrev. Normalt signeres dokumenter og følgebrev hver for seg, av forskjellige parter. 
+Typisk vil dokumentet måtte signeres av rettighetshaver, for eksempel rettighetshaver til eiendomsrett, eller rettighetshaver i en Leierett som pantsettes. 
+I sistnevnte tilfelle må denne rettighetshaveren signere når et pant i en slik rettighet skal tinglyses. 
+Den som sender pantedokumentet sammen med følgebrevet, typisk en finansinstitusjon, vil normalt signere dette følgebrevet. 
+Følgebrevet skal signeres med et virksomhetssertifikat.  
 
-I dette eksempelet så er det to ulike parter som signerer. I et annet tilfelle, for eksempel når man skal slette et pant, så kan parten som skal signere dokument og følgebrev være den samme. Vi har derfor tilrettelagt for at man skal kunne elektronisk signere dokument og følgebrev samlet. Det er ikke alltid dette gir mening, men i de tilfeller der organisasjon kan signere og dette er den samme part som signerer følgebrevet, så kan det gir færre signeringer og dermed også reduserte kostnader.
-
-I de fleste tilfeller så vil alle identer for person og juridisk person som er benyttet for å signere et dokument eller følgebrev sendes med som identifikasjonsnummer for det som brukes i signaturkontroll. Det finnes noen unntak. Se seksjon om signering for ytterligere beskrivelse.
+I dette eksempelet er det to ulike parter som signerer. I et annet tilfelle, for eksempel når man skal slette et pant, kan parten som skal 
+signere dokument og følgebrev være den samme. Det er derfor tilrettelagt for at man skal kunne elektronisk signere dokument og følgebrev samlet. 
+Det er ikke alltid dette gir mening, men i de tilfeller der organisasjon kan signere og dette er den samme part som signerer følgebrevet, kan 
+det gir færre signeringer og dermed også reduserte kostnader.
 
 Se for øvrig beskrivelsen [Signatur Fullmakt og Vitner](http://www.kartverket.no/eiendom/signatur-fullmakt-og-vitner/) for en mer utførlig beskrivelse av dette konseptet.
 
@@ -70,9 +75,15 @@ Se for øvrig beskrivelsen [Signatur Fullmakt og Vitner](http://www.kartverket.n
 ## 2. Innsendingsgrensesnitt
 
 
-Innsendingsgrensesnittet baserer seg på en signeringsløsning, basert på SEID-SDO med bruk av BankID XML og XSL for visning av dokumenter til signering for sluttbruker.
+Innsendingsgrensesnittet baserer seg på en signeringsløsning, basert på SEID-SDO med bruk av BankID XML og XSL for visning 
+av dokumenter til signering for sluttbruker.
 
-Innsendingsapi for tinglysing støtter validering og tinglysing av signerte og usignerte meldinger som inneholder instruksjoner om dokumenter som skal tinglyses. Grensesnittet er tilpasset signeringsløsningen på en slik måte at datastrukturen som representerer dokumentene, og som sendes inn i tjenestene, er den samme som brukes som grunnlag for visning med XSL med BankID eller med andre eId-leverandører som støtter BIDXML. Presentasjonsmalen er laget på en slik måte at all informasjon som ligger i XML strukturen vil bli vist, således vil samtlige av elementene i det som signeres av rettighetshaver ha blitt forevist den rettighetshaveren som har signert.
+Innsendingsapi for tinglysing støtter validering og tinglysing av signerte og usignerte meldinger som inneholder instruksjoner 
+om dokumenter som skal tinglyses. Grensesnittet er tilpasset signeringsløsningen på en slik måte at datastrukturen som 
+representerer dokumentene, og som sendes inn i tjenestene, er den samme som brukes som grunnlag for visning med XSL med 
+BankID eller med andre eId-leverandører som støtter BIDXML. Presentasjonsmalen er laget slik at all informasjon 
+som ligger i XML strukturen vil bli vist, således vil samtlige av elementene i det som signeres av rettighetshaver ha 
+blitt forevist den rettighetshaveren som har signert.
 
 **Som kontaktpunkt for BankID henviser vi til [BankId Bedrift](https://www.bankid.no/For-partnere/)**
 
@@ -80,19 +91,28 @@ Se også egen seksjon litt senere: Innsending av signerte dokumenter for en besk
 
 Innsendingsgrensesnittet er definert som en WebService med endepunkter og operasjoner for innsending av signerte og usignerte dokumenter, en valideringstjeneste som man kan bruke i test og produksjon for å verifisere innhold før man sender dem til signering, samt en tjeneste for å hente status på tidligere innsendte dokumenter. 
 
-Samtlige av disse tjenestene er tilgjengelige i test for å gi en tettere og raskere integrasjon i test, der to av de tre tjenestene er synkrone og returnerer data, mens kun valideringsgrensesnittet for usignerte og signerte meldinger er tilgjengelige i produksjon. For all annen integrasjon så skal filer til tinglysing og status på innsendte dokumenter formidles til Kartverket gjennom [Altinn Formidlingstjeneste](https://www.altinn.no/no/Toppmeny/Om-Altinn/For-offentlig-sektor/Fra-skjemasamarbeid-til-e-forvaltning-i-verdensklasse/Tjenestetyper-i-Altinn/Formidlingstjeneste/). Se egen seksjon: Altinn formidlingstjeneste for en beskrivelse av denne tjenesten. Kartverket har publisert eksempelklienter som open-source som viser hvordan denne integrasjonen kan etableres: [Altinn eksempelklient](https://github.com/kartverket/eksempelklient-etinglysing-altinn)
+Samtlige av disse tjenestene er tilgjengelige som WebService i test for å gi en tettere og raskere integrasjon i test, der to av de tre 
+tjenestene er synkrone og returnerer data, mens kun valideringsgrensesnittet for usignerte og signerte meldinger er 
+tilgjengelige som WebService i produksjon. For all annen integrasjon skal filer til tinglysing og status på innsendte dokumenter 
+formidles til Kartverket gjennom Altinn formidlingstjeneste.. 
+Se egen seksjon om Altinn formidlingstjeneste for en beskrivelse av denne tjenesten. Kartverket har publisert eksempelklienter 
+som open-source som viser hvordan denne integrasjonen kan etableres: [Altinn eksempelklient](https://github.com/kartverket/eksempelklient-etinglysing-altinn)
 
 ### Tjenester
 
-Det er implementert tre funksjoner for innsending. Disse kan brukes uavhengig av grunnbokens øvrige tjenester, og de er uavhengig av hverandre.
+Det er implementert tre funksjoner for innsending. Disse kan brukes uavhengig av grunnbokens øvrige tjenester, og de er uavhengige av hverandre.
 
 Signerte data vil kunne brukes i tjenestene for å validere og å sende melding til tinglysing i produksjon og i test. For signerte meldinger i test kommuniserer grunnboksystemet med BankID i test, og aksepterer meldinger signert av sertifikater utstedt fra BankID test CA. For produksjon aksepterer vi signerte meldinger signert av BankID CA.
 
-Følgende tjenester tilbys, som WebService i test, men bare valider er tilgjengelig som WebService i produksjon. For elektronisk innsending til tinglysing må innsender benytte Altinn Formidlingstjeneste. Payloaden som sendes med til Altinn er den samme som i Webtjenestene. Dette er derfor å regne som et rent transportanliggende. Alle tre abstraksjonene er modellert også i formidlingstjenesten så dette bør oppleves som ganske likt.
+Følgende tjenester tilbys som WebService i test, men bare valider er tilgjengelig som WebService i produksjon. For elektronisk innsending til tinglysing må innsender benytte Altinn Formidlingstjeneste. Payloaden som sendes med til Altinn er den samme som i Webtjenestene. Dette er derfor å regne som et rent transportanliggende. Alle tre abstraksjonene er modellert også i formidlingstjenesten så dette bør oppleves som ganske likt.
 
 #### valider
 
-Tjenesten kan kalles for å validere en signert eller en usignert melding, både i test og i produksjon.  Valideringstjenesten gir ingen garanti for at dokumenter som validerer uten feil vil kunne tinglyses.  Formålet med tjenesten er å forsøke å finne opplagte mangler i dokumenter før de sendes til signering, eller gjøre oppmerksom på eventuelle forhold på valideringstidspunktet som kan hindre tinglysing. Dette bør fortrinnsvis gjøres for å forsikre seg om at et dokument er gyldig før man sender det til signering. Et dokument som er signert kan aldri endres, men må signeres på nytt. 
+Tjenesten kan kalles for å validere en signert eller en usignert melding, både i test og i produksjon.  Valideringstjenesten 
+gir ingen garanti for at dokumenter som validerer uten feil vil kunne tinglyses.  Formålet med tjenesten er å forsøke å finne 
+åpenbare mangler i dokumenter før de sendes til signering, eller gjøre oppmerksom på eventuelle forhold på valideringstidspunktet 
+som kan hindre tinglysing. Dette bør fortrinnsvis gjøres for å forsikre seg om at et dokument er gyldig før man sender det 
+til signering. Et dokument som er signert kan aldri endres, men må signeres på nytt. 
 
 Det er ikke noe krav om at man i det avleverende fagsystemet skal bruke valider før man sender data til tinglysing. 
 
@@ -106,7 +126,11 @@ Tjenesten vil i produksjon slå opp data samt validere mot eId-leverandørers pr
 
 #### hentStatus
 
-Etter at en melding er mottatt av systemet kan man hente oppdatert behandlingsstatus for den innsendte meldingen. Input til denne tjenesten er en innsendingId som man har fått tilbake etter at man har sendt en melding med minst ett dokument til tinglysing som Kartverket har akseptert.
+Etter at en melding er mottatt av systemet kan man hente oppdatert behandlingsstatus for den innsendte meldingen. Input til 
+denne tjenesten er en innsendingId som man har fått tilbake etter at man har sendt en melding med minst ett dokument til 
+tinglysing som Kartverket har akseptert. Ved innsending med Altinn formidlingstjeneste vil man normalt ikke benytte hentStatus, 
+da statusmeldingene automatisk pushes fra systemet og kan hentes ut via formidlingstjenesten, se egen seksjon om Altinn 
+formidlingstjeneste.
 
 #### Sekvensdiagram
  
@@ -118,13 +142,17 @@ Etter at en melding er mottatt av systemet kan man hente oppdatert behandlingsst
 
 Dokumenter som ønskes tinglyst som en enhet samles som en signert eller en usignert melding i en forsendelse. Meldingen inneholder ett eller flere dokumenter, samt et følgebrev som refererer til de individuelle dokumentene, og dermed også bekrefter hvor mange dokumenter forsendelsen inneholder og hvilken rekkefølge disse har.
 
-Følgebrevet inneholder også innsenders identifikasjonsnummer, og det valideres at innsender er en eksisterende person eller organisasjon. Innsender må signere på følgebrevet med sitt brukerstedssertifikat. 
+Følgebrevet inneholder også innsenders identifikasjonsnummer, og det valideres at identifikasjonsnummeret er et gyldig organisasjonsnummer. 
 
-Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne opprettes og signeres uavhengig av grunnboksystemet, dersom innsender har tilstrekkelig informasjon. I tillegg skal potensielt flere dokumenter signeres av rettighetshavere, vi må derfor ta høyde for at dokumenter kan eksistere i signert form i flere utgaver. Blant annet må innsender ha informasjon om koder som skal anvendes i dokumentene som skal tinglyses. Informasjon om koder er statisk og vil kunne hentes på forhånd gjennom avgivergrensesnittet, eller kopieres inn og vedlikeholdes i et fagsystem på utsiden av kartverket. Innsendte koder som ikke kan oversettes til koder systemet kjenner igjen vil forårsake systemfeil. 
+Innsendingsgrensesnittet er utformet med henblikk på at dokumenter skal kunne opprettes og signeres uavhengig av grunnboksystemet, 
+dersom innsender har tilstrekkelig informasjon. Innsender må blant annet ha informasjon 
+om koder som skal anvendes i dokumentene som skal tinglyses. Informasjon om koder er statisk og vil kunne hentes på forhånd 
+gjennom avgivergrensesnittet, eller kopieres inn og vedlikeholdes i et fagsystem på utsiden av kartverket. Innsendte koder 
+som ikke kan oversettes til koder systemet kjenner igjen vil forårsake systemfeil. 
 
 #### Vedlegg
 
-En melding til tinglysing kan fra versjon 3.16 også inneholde vedlegg til dokumentene i meldingen. Vedlegg legges i forsendelsen på samme måte enten meldingen er signert eller usignert, og hvert vedlegg må ha en vedleggsreferanse som er unik innenfor meldingen, samt en base64-encodet pdf.
+En melding til tinglysing kan fra også inneholde vedlegg til dokumentene i meldingen. Vedlegg legges i forsendelsen på samme måte enten meldingen er signert eller usignert, og hvert vedlegg må ha en vedleggsreferanse som er unik innenfor meldingen, samt en base64-encodet pdf.
 
 Følgebrevet må inneholde metadata for hvert vedlegg, der disse metadata kobler et vedlegg til et dokument og til en eller flere vedleggskategorier.
 
@@ -156,11 +184,17 @@ For elektronisk innsendte meldinger er følgende verdier relevante:
 | AVSLUTTET | AVVIST | Meldingen er avvist og ble ikke registret i grunnboken |
 | AVSLUTTET | TINGLYST | Meldingen er tinglyst i grunnboken. |
 | AVSLUTTET | NEKTET | Meldingen er nektet i grunnboken. |
-| UKJENT_TEKNISK_FEIL | UAVKLART | Meldingen har støtt på en ukjent teknisk feil og venter på videre avklaring. Behandling av meldingen vil fortsette fra forrige tilstand på et senere tidspunkt. <ul><li>Hvis forrige status var MOTTATT er meldingen ennå ikke registret i grunnboken og vil bli forsøkt registret i grunnboken på et senere tidspunkt.</li><li>Hvis forrige status var UNDER_BEHANDLING er meldingen allerede registret i grunnboken og videre behandling vil skje på et senere tidspunkt.</li></ul> |
+| UKJENT_TEKNISK_FEIL | UAVKLART | Meldingen har støtt på en ukjent teknisk feil og venter på videre avklaring./
+
+Behandling av meldingen vil fortsette fra forrige tilstand på et senere tidspunkt. Formidler av meldingen trenger ikke å foreta seg noe.<ul>
+<li>Hvis forrige status var MOTTATT er meldingen ennå ikke registrert i grunnboken og vil bli forsøkt registrert på et senere tidspunkt.</li>
+<li>Hvis forrige status var UNDER_BEHANDLING er meldingen allerede registrert i grunnboken og videre behandling vil skje på et senere tidspunkt.</li></ul>
  
 Hvis dokumentene i meldingen er avvist vil statusfeltene saksstatus og behandlingsutfall i forsendelsesstatus inneholde den overordnede tilstanden, mens behandlingsinformasjon vil inneholde kontrollresultat med begrunnelse for avvisningen i form av strukturert informasjon med koder, men også med lesbare tekster.
 
-Dersom dokumentene i meldingen er blitt registrert i grunnboken inneholder forsendelsesstatus blant annet informasjon om registreringstidspunkt (prioritet), samt tildelte dokumentnummer og rettsstiftelsesnummer. Disse er angitt med en kobling til innsenders oppgitte referanser for hhv. dokumentene og rettsstiftelsene. Når dokumentene i meldingen er tinglyst gjøres det også tilgjengelig et sett av signerte grunnboksutskrifter for de registerenheter som er berørte av denne tinglysingen.
+Dersom dokumentene i meldingen er blitt registrert i grunnboken inneholder forsendelsesstatus blant annet informasjon om registreringstidspunkt 
+(prioritet), samt tildelte dokumentnummer og rettsstiftelsesnummer. Disse er angitt med en kobling til innsenders oppgitte referanser for hhv. 
+dokumentene og rettsstiftelsene.
 
 #### Kontrollresultater
 
@@ -178,14 +212,14 @@ Kontrollresultater kan ha følgende utfall:
 
 Dokumentene i en forsendelse som går til manuell behandling vil være registrert i grunnboken. Den manuelle behandlingen gir som resultat at dokumentene i forsendelsen enten blir tinglyst eller nektet.
 
-### Link til utskrift
+### Bekreftet grunnboksutskrift
 
-Funksjonaliteten 'Link til utskrift' ved elektronisk innsending innebærer en overgang fra at en bekreftet utskrift som genereres ved tinglysing 
-returneres som en signert PDF (SDO), til at det returneres en link som gir tilgang til den bekreftede utskriften som ligger lagret på Kartverkets servere.
+Når dokumentene i en melding er tinglyst, gjøres det tilgjengelig en bekreftet grunnboksutskrift for hver av registerenhetene
+som er berørte av denne tinglysingen. Hver utskrift er representert ved en link i Forsendelsesstatus-strukturen, der linken peker til en 
+bekreftet grunnboksutskrift beliggende på en server hos Kartverket.
 
-I en overgangsperiode fra mai og ut oktober 2021 kan aktørene selv styre om det ønskes returnert SDO _eller_ link, ved å sette flagget linkTilUtskrifter i forsendelsen. Ved SDO returneres elementet signerteGrunnboksutskrifter i Forsendelsesstatus / tinglysingsinformasjon, mens ved link returneres elementet grunnboksutskrifter.
-
-Etter denne perioden har flagget ingen effekt, og kun link vil returneres.
+En utprinting eller andre former for kopi av en bekreftet utskrift som aksesseres via linken vil i seg selv ikke være en bekreftet utskrift, 
+men vil være å anse som en visning av den bekreftede utskriften som er lagret hos Kartverket.
 
 ### Feilhåndtering
 
@@ -197,7 +231,9 @@ Ved uventede feil, eller dersom meldingen ikke er lesbar, vil slike feil propage
 
 I forbindelse med signering av dokumenter er det krav til å vise tilleggsinformasjon (kontekst-informasjon) for sluttbruker, slik som navn på personer, for at sluttbruker skal få bedre forståelse av hva det signeres på. Ved innsending må alltid fullstendig identifikator for hvert dataelement sendes inn, selv om denne ikke nødvendigvis er vist for sluttbruker. Også kontekstinformasjon vist for sluttbruker må sendes inn, selv om systemet i utgangspunktet ikke har behov for denne, men det er avgjørende for den visuelle inspeksjonen ved signering, og det er det denne informasjonen brukes til.
 
-Det stilles krav til validering av innsendt kontekstinformasjon. Eksempelvis er det krav om at navn og identifikasjonsnummer på personer skal valideres mot data fra folkeregisteret, mens kodeverdi og navn på koder skal valideres mot systemets egne data. Systemet avviser en melding dersom validering av kontekstinformasjon feiler. 
+Det stilles krav til validering av innsendt kontekstinformasjon. Eksempelvis er det krav om at navn og identifikasjonsnummer 
+på personer skal valideres mot data fra folkeregisteret, mens kodeverdi og navn på koder skal valideres mot systemets egne data. 
+Systemet avviser en melding dersom validering av kontekstinformasjon feiler. 
 
 #### Validering av navn fra folkeregisteret
 
@@ -210,15 +246,24 @@ Navn innsendt på kontekstinformasjon av typen:
 </person>
 ```
 
-Vil bli validert på tom måter, først mot det som folkeregisteret representerer som Fullt Navn. Dette vil være et navn som forkortes i henhold til de regler som folkeregisteret definerer på 50 tegn. Deretter vil man validere opp mot den sammensatte fulle og sammensatte strengen av ETTERNAVN+FORNAVN+MELLOMNAVN. Sammenlikningen er case insensitiv.
+Vil bli validert på to måter, først mot det som folkeregisteret representerer som Fullt Navn. Dette vil være et navn som 
+forkortes i henhold til de regler som folkeregisteret definerer på 50 tegn. Deretter vil man validere opp mot den sammensatte 
+fulle og sammensatte strengen av ETTERNAVN+FORNAVN+MELLOMNAVN. Sammenlikningen er case insensitiv.
 
 #### Validering av navn fra enhetsregisteret
 
-Validering av navn fra enhetsregisteret blir gjort mot det som heter «Redigert navn» som har en maksimal lengde på 50 tegn. Hvis ikke redigert navn stemmer med det innsendte navnet så validerer vi mot et navn bestående av organisasjonsnavn1..organisasjonsnavn5 med mellomrom i mellom. Sammenlikningen er case insensitiv.
+Validering av navn fra enhetsregisteret blir gjort mot det som heter «Redigert navn» som har en maksimal lengde på 50 tegn. 
+Hvis ikke redigert navn stemmer med det innsendte navnet så validerer vi mot et navn bestående av organisasjonsnavn1..organisasjonsnavn5 
+med mellomrom i mellom. Sammenlikningen er case insensitiv.
 
 ## 3. Innsending med Altinn Formidlingstjeneste
 
-Altinn Formidlingstjeneste er den primære kanalen for å benytte innsendingsgrensesnittet. I produksjon vil sendTilTinglysing og hentStatus kun være tilgjengelig via Altinn grensesnittet mens valider vil være tilgjengelig både via Altinn og WebService grensesnittet. For detaljert dokumentasjon og kodeeksempler på hvordan man kan integrere mot innsendingsgrensesnittet via Altinn finnes det en eksempelklient tilgjengelig i GitHub. Det vil derfor kun bli gitt en overordnet beskrivelse av funksjonaliteten i dette dokumentet.
+Altinn Formidlingstjeneste er den primære kanalen for å benytte innsendingsgrensesnittet. I produksjon vil sendTilTinglysing 
+og hentStatus kun være tilgjengelig via Altinn grensesnittet mens valider vil være tilgjengelig både via Altinn og WebService 
+grensesnittet. For detaljert dokumentasjon og kodeeksempler på hvordan man kan integrere mot innsendingsgrensesnittet via 
+Altinn finnes det en eksempelklient tilgjengelig i GitHub. Det vil derfor kun bli gitt en overordnet beskrivelse av 
+funksjonaliteten i dette dokumentet.
+
 Formidlingstjenesten i Altinn baserer seg på at man laster opp en zip fil til Altinn som deretter blir formidlet til riktig mottaker(e). Innholdet i zip filen vil være en fil som inneholde en forsendesle. Det er kun støtte for å sende en forsendelse av gangen i zip filen. Tjenesten som Kartverket har satt opp er konfigurert sånn at det er kun mulig å sende og motta filer til/fra Kartverket. 
 
 #### Bruk av Altinn grensesnittet
@@ -227,7 +272,16 @@ For å kalle Altinn formidlingstjenesten benyttes et sett SOAP endepunkter. For 
 
 ![Figur 1 Altinn](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/altinn1.png)
  
-Dersom forsendelsen har blitt mottatt og innsendingsgrensesnittet har klart å lese forsendelsen vil det bli sendt en eller flere filer tilbake via Altinn som respons på forsendelsen. Operasjonene valider og hentStatus vil kun trigge at en fil blir sendt tilbake, mens dersom man kaller sendTilTinglysing vil man få en ny forsendelsesstatus hver gang det skjer en relevant endring i status. Det må derfor kontinuerlig sjekkes mot Altinn om det har kommet nye filer. Man poller på filer basert på organisasjonsnummer. For å koble sammen forsendelseresponsen til riktig utgående forespørsel benyttes innsendingsId. Dersom innsendingsId ikke finnes kan en egen referanse man selv setter i det man initierer oversendelsen (sendersReference) benyttes. Se en figuren nedenfor for en beskrivelse av flyten og av hvilke tjenester som blir benyttet.
+Dersom forsendelsen har blitt mottatt og innsendingsgrensesnittet har klart å lese forsendelsen vil det bli sendt en eller 
+flere filer tilbake via Altinn som respons på forsendelsen. Det må derfor kontinuerlig sjekkes mot Altinn om det har kommet nye filer. 
+Operasjonene valider og hentStatus vil kun trigge at en fil blir sendt tilbake, mens dersom man kaller sendTilTinglysing 
+vil man få en ny forsendelsesstatus hver gang det skjer en relevant endring i status. Ved
+sendTilTinglysing trenger man altså normalt ikke benytte hentStatus operasjonen, ettersom status pushes automatisk. 
+
+Man poller på filer 
+basert på organisasjonsnummer. For å koble sammen forsendelseresponsen til riktig utgående forespørsel benyttes innsendingsId. 
+Dersom innsendingsId ikke finnes kan en egen referanse man selv setter i det man initierer oversendelsen (sendersReference) 
+benyttes. Se figuren nedenfor for en beskrivelse av flyten og av hvilke tjenester som blir benyttet.
 
 ![Figur 2 Altinn](https://github.com/kartverket/etinglysing-systembeskrivelse/blob/master/doc/altinn2.png)
  
@@ -235,11 +289,13 @@ Før man kan ta i bruk Altinn som kanal for inngående meldinger så må man få
 
 ### Altinn dokumentasjon
 
-For dokumentasjon av Altinn løsningen se [altinn dokumentasjon for sluttbrukersystemer](https://altinn.github.io/docs/guides/sluttbrukersystem/) særlig det som gjelder formidlingstjenesten.
+For informasjon om Altinn formidlingstjeneste se [dokumentasjon](https://altinn.github.io/docs/api/rest/formidling/).
 
 ## 4. Prosessflyt 
 
-Systemet implementerer en asynkron prosessflyt, slik at tinglysingskallet kun sikrer at systemet har mottatt meldingen. Videre behandling av meldingen skjer asynkront. Innsendingsapiet har tjenesten hentStatus som innsender kan kalle for å følge med på meldingens behandlingsstatus. Når tjenesten for å tinglyse en melding har returnert uten feil, garanteres det at meldingen er mottatt av systemet og at et påfølgende kall som henter behandlingsstatus vil returnere en ikke-tom respons.
+Systemet implementerer en asynkron prosessflyt, slik at tinglysingskallet kun sikrer at systemet har mottatt meldingen. 
+Videre behandling av meldingen skjer asynkront. Når tjenesten for å tinglyse en melding har returnert uten feil, garanteres 
+det at meldingen er mottatt av systemet og at Kartverket ivaretar videre behandling av meldingen.
 
 ## 5. Funksjonalitet og begrensninger 
 
@@ -248,8 +304,9 @@ Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av ek
 * Eierskifte matrikkelenhet (HJ_HJG)
 * Overdragelse av festerett med og uten bygning (TF_OMB, TF_OUB)
 * Eierskifte borettslagsandel (BH_HJA)
+* Anmerkning på registerenhetsrettsandel, kun ved skifteoppgjør (EN_SAT)
+* Annen heftelse, herunder urådighet samt rettigheter ved skifteoppgjør (AH_URK, AH_GAR, AH_PBF, AH_PBG, AH_PBH)
 * Pantedokument, herunder bytte av bank (OB_PDO, OB_PDB)
-* Annen heftelse, kun urådighet (AH_URK)
 * Sletting, herunder begrenset/delvis sletting (SL_SLE)
 * Transport, herunder massetransport (TR_TRA, TR_TRP, TR_TAS, TR_MAS, TR_FUS)
 * Nedkvittering (NE_NEK)
@@ -261,7 +318,7 @@ Følgende typer rettsstiftelser er tilgjengelig for elektronisk innsending av ek
 
 I tillegg kommer rettsstiftelser som kun kan sendes inn fra matrikkelen.
 
-Dokumentasjon av rettsstiftelsestypene finnes i UML-modellen for innsending.
+Dokumentasjon av rettsstiftelsestypene finnes i [UML-modellen for innsending](https://etgltest.grunnbok.no/grunnbok/modell/grunnbok-innsending-v2-modell/index.html).
 
 Innsendingsgrensesnittet krever at XML-delen tilhørende BIDXML kan valideres mot XSD for namespacet for innsendingsskjemaet. Dette må oppgis på standardisert vis med namespacehenvisning i XML-dokumentet. Det kreves også at XSL-delen tilhørende BIDXML kan valideres mot godkjente versjoner av XSL transformasjonen. Innpakket XSL må således være binært identisk med en versjon som er publisert av Kartverket.
 
@@ -269,7 +326,7 @@ Det er ingen validering av gyldig offisiell versjon av XSL når man skal valider
 
 ## 6. Innsending av signerte dokumenter
 
-For å forenkle testingen av hvordan man må bygge opp rettsstiftelser, så støtter innsendings-api i test validering samt mottak og behandling av usignerte meldinger. 
+For å forenkle testingen av hvordan man må bygge opp rettsstiftelser støtter innsendings-api i test validering samt mottak og behandling av usignerte meldinger. 
 
 En forsendelse med usignert melding vil representere grunnlaget for en signert melding. I de tilfellene så vil det som representerer henholdsvis `<dokument>` i en usignert melding mappes inn som en `<SDODokument>` i signert melding. Det samme gjelder for følgebrev. Denne beskrivelsen vil vise hvordan man med utgangspunkt i en forsendelse med usignert dokument kan etablere en forsendelse med ett eller flere signerte dokumenter samt et signert følgebrev. 
 Normalt så vil vi har følgende elementer som kan opptre i signert melding avhengig av hvordan data er pakket sammen
@@ -336,7 +393,9 @@ Eksempler på denne konverteringen vises i etterfølgende avsnitt.
 
 #### Signert forsendelse med signert dokument for pant og signert følgebrev
 
-Det signerte dokumentet opprettes ved at hvert enkelt element `<dokument>` etableres som en SDO signert av rettighetshavere. I tillegg til dette opprettes følgebrevet som en SDO signert med brukerstedsertifikatet til den formidlende part. Det trenger ikke å være noen relasjon mellom denne virksomheten i brukerstedssertifikatet og det som er oppgitt som innsender i følgebrevet. Forsendelsen med de signerte dokumentene vil etter at de signerte elementene i form av SDODokument har blitt samlet inn fra signeringsprosessen se slik ut:
+Det signerte dokumentet opprettes ved at hvert enkelt element `<dokument>` etableres som en SDO signert av rettighetshavere. 
+I tillegg til dette opprettes følgebrevet som en SDO signert med virksomhetssertifikat. 
+Forsendelsen med de signerte dokumentene vil etter at de signerte elementene i form av SDODokument har blitt samlet inn fra signeringsprosessen se slik ut:
 
 ```xml
 <?xml version=’1.0’ encoding=’ISO-8859-1’?>
@@ -501,23 +560,29 @@ For følgebrevet så er det et spesielt hensyn som må tas. For at det ikke skal
 </foelgebrev>
 ```
 
-Det er dette grunnlaget, inkludert digest-referanser som skal signeres med brukerstedssertifikat. Når følgebrevet valideres så vil vi validere dette opp mot den beregnede Digest for det signerte dokumentet. Man trenger ikke å beregne denne, denne hentes fra `<HashedData>` oppgitt i SDO for de signerte dokumentene. Man kan lage en enkel parser for dette selv, eller eventuelt bruke BankId sin implementasjon som inneholder klasser og metoder for å konvertere bytes med XML-data til en SDO-struktur i Java eller C#. Gyldigheten av disse refererte verdier vil valideres når dokumentet valideres, og så slipper man å lage programkode for å beregne Digest over det som er BIDXML strukturen som man normalt ikke vil se eller behandle selv.
+Det er dette grunnlaget, inkludert digest-referanser som skal signeres med virksomhetssertifikat. Når følgebrevet valideres så vil vi validere dette opp mot den beregnede Digest for det signerte dokumentet. Man trenger ikke å beregne denne, denne hentes fra `<HashedData>` oppgitt i SDO for de signerte dokumentene. Man kan lage en enkel parser for dette selv, eller eventuelt bruke BankId sin implementasjon som inneholder klasser og metoder for å konvertere bytes med XML-data til en SDO-struktur i Java eller C#. Gyldigheten av disse refererte verdier vil valideres når dokumentet valideres, og så slipper man å lage programkode for å beregne Digest over det som er BIDXML strukturen som man normalt ikke vil se eller behandle selv.
 
 Hvis det er flere dokumenter i en melding, så gjentas denne prosessen for hvert av de dokumentene som man skal signere. En SDO kan kun inneholde et `<dokument>` eller et `<foelgebrev>` som rotnode inne i BIDXML. Forutsetningen er at man signerer på et dokument i sin helhet. Disse kan signeres av rettighetshavere i forskjellige løsninger, slik som i en nettbank eller en signeringsportal. Når det er flere rettighetshavere som skal signere, så vil man normalt samle inn flere SDO fra BankId for disse signeringene for så å kombinere dette inn i en SDO med flere signaturer. Dette er mulig når det signerte innholdet er likt, men det er flere rettighetshavere som skal signere.
-For følgebrevet som skal signeres med brukerstedssertifikat så er det ikke noen spesielle krav til xsl-transformasjonen som pakkes inn sammen med følgebrevet ut over de krav som eventuelt kommer fra BankId. Kartverket leverer ikke fra seg noen xsl for følgebrevet og har derfor heller ikke noen validering av dette innholdet.
+For følgebrevet som skal signeres med virksomhetssertifikat så er det ikke noen spesielle krav til xsl-transformasjonen som pakkes inn sammen med følgebrevet ut over de krav som eventuelt kommer fra BankId. Kartverket leverer ikke fra seg noen xsl for følgebrevet og har derfor heller ikke noen validering av dette innholdet.
  
 ## 7. Hvilke identifikasjonsnumre følger med inn til signaturkontroll
 
-Identifikasjonsnumre som kan utledes fra sertifikatet enten gjennom oppslag i BankId sin VA tjeneste, eller hentet ut fra subjekt feltet for brukerstedssertifikat, følger med inn i signaturkontrollen. I tillegg følger identifikasjonsnummeret fra følgebrevet med inn i signaturkontroll for hvert dokument. 
+Identifikasjonsnumre som hentes ut fra signaturene på dokumentet følger med inn i signaturkontrollen. 
+I tillegg følger identifikasjonsnummeret fra følgebrevet med inn i signaturkontroll for hvert dokument. 
+
+I signaturkontrollen sjekkes det i henhold til spesifikke regler for hver type rettsstiftelse i dokumentet at de påkrevde rettighetshavere har
+signert dokumentet. Det aksepteres overflødige signaturer på dokumentet.
+
+### Eksempler
 
 Vi bruker følgende konvensjoner:
 
-**Rolle(B)** eller **Rolle(P)** for å betegne en rolle som signerer, for eksempel **Selger** og **B** for brukerstedssertifikat og **P** for personsertifikat. Rolle representerer et identifikasjonsnummer, når vi skriver **Selger** så mener vi identifikasjonsnummeret som tilhører denne rollen.
+**Rolle(B)** eller **Rolle(P)** for å betegne en rolle som signerer, for eksempel **Selger** og **B** for virksomhetssertifikat og **P** for personsertifikat. Rolle representerer et identifikasjonsnummer, når vi skriver **Selger** så mener vi identifikasjonsnummeret som tilhører denne rollen.
 
-### Dokumentpakke
+#### Dokumentpakke
 
 Dokumentpakke, sletting av gammelt pant i DnB, eierskifte med Selger og Kjøper, pant for ny eier i Skandiabanken, sendt inn av Megler.
-Sletting signeres av DnB med brukerstedssertifikat. Selger signerer Eierskifte i eBoks sendt fra meglerens system, ny eier signerer pantedokument i Skandiabankens nettbank. Megler samler inn dokumenter, signerer følgebrev med brukerstedssertifikat og sender inn.
+Sletting signeres av DnB med virksomhetssertifikat. Selger signerer Eierskifte i eBoks sendt fra meglerens system, ny eier signerer pantedokument i Skandiabankens nettbank. Megler samler inn dokumenter, signerer følgebrev med virksomhetssertifikat og sender inn.
 
 
 | Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
@@ -527,9 +592,9 @@ Sletting signeres av DnB med brukerstedssertifikat. Selger signerer Eierskifte i
 | Pantedokument | Kjøper(P), Skandiabanken(B) | Kjøper, Skandiabanken, Megler |
 | Følgebrev | Megler(B) | Megler |
 
-### Sletting med følgebrev
+#### Sletting med følgebrev
 
-DnB sender inn en sletting signert med brukerstedssertifikat, det samme sertifikatet brukes for å signere følgebrevet.
+DnB sender inn en sletting signert med virksomhetssertifikat, det samme sertifikatet brukes for å signere følgebrevet.
 
 | Signert objekt | Teknisk Signatur | Identifikasjonsnummer til signaturkontroll |
 |-------------------------|-------------------------|-------------------------|
@@ -555,7 +620,8 @@ Dette gjør vi ved å dele opp behandlingen av signerte og usignerte meldinger i
 
 For forsendelse med `<signertMelding>` og forsendelse med `<usignertMelding>` så er behandlingen helt lik.
 
-Formidlingen av identifikasjonsnumre fra de signerte dokumentene og eventuelt følgebrev blir hentet fra SDO og/eller fra BankId avhengig av hvordan brukerstedet er definert. Dette eller disse identifikasjonsnumrene blir deretter lagt inn i feltet som holder signaturer for et dokument.
+Formidlingen av identifikasjonsnumre fra de signerte dokumentene og eventuelt følgebrev blir hentet fra SDO. 
+Dette eller disse identifikasjonsnumrene blir deretter lagt inn i feltet som holder signaturer for et dokument.
 
 For et signert dokument som sendes inn, så består konverteringen i steg 1) fra 
 følgende dokument:
@@ -634,9 +700,14 @@ Her ser vi at forsendelsen med en signertMelding har blitt konvertert til en for
 
 ## 9. Bruk av BANKID grensesnitt for å signere SDO
 
-BankId tilbyr klientgrensesnitt og eksempelklienter i Java og C# for å implementere signeringsdialog som brukersted, både for sluttbruker gjennom signering i nettleser, men også for serversidesignering som brukersted. 
+BankId tilbyr klientgrensesnitt og eksempelklienter i Java og C# for å implementere signeringsdialog som brukersted, 
+både for sluttbruker gjennom signering i nettleser, men også for serversidesignering som brukersted. 
 
-For scenariet som dekker signering i nettleser så er det utenfor scopet til dette dokumentet å vise det i sin helhet. Vi anbefaler at brukerstedet gjør seg kjent med den dokumentasjonen som finnes på http://bankid.no på innlogget område. Her kan man laste ned eksempelkode og annen programvare samt dokumentasjon som viser hvordan dette fungerer. Vi kan ikke gi en uttømmende forklaring på hvordan dette fungerer her, men vi vil og noen henvisninger til de relevante grensesnittene som kan brukes for å generere SDO som etterfølgende kan pakkes som et eller flere `<SDODokument>` i en `<SignertMelding>`.
+For scenariet som dekker signering i nettleser så er det utenfor scopet til dette dokumentet å vise det i sin helhet. 
+Vi anbefaler at brukerstedet gjør seg kjent med den dokumentasjonen som finnes på http://bankid.no på innlogget område. 
+Her kan man laste ned eksempelkode og annen programvare samt dokumentasjon som viser hvordan dette fungerer. 
+Vi kan ikke gi en uttømmende forklaring på hvordan dette fungerer her, men vi vil og noen henvisninger til de relevante 
+grensesnittene som kan brukes for å generere SDO som etterfølgende kan pakkes som et eller flere `<SDODokument>` i en `<SignertMelding>`.
 
 ### Signering av xml og xsl med banklagret sertifikat
 
@@ -723,7 +794,10 @@ dynamicSDO.addSignedDataRaw(signedData);
 final byte[] sdoXMLBytes = dynamicSDO.toXML();
 ```
 
-Den resulterende SDO vil inneholde samtlige signaturer, også signaturer for de pågjeldende brukersteder. Brukerstedssertifikatene er ikke relevante for denne signeringen og valideringen og kan derfor filtreres ut. Resultatet av dette kan formidles som en SDO i SDODokument i en egnet forsendelse. Dokumentene vil alltid inneholde mer enn en signatur. Det er påkrevet at slike dokumenter er forseglet med et `<SDOSeal>`, det vil bli sjekket som en del av valideringslogikken for disse SDO objekter.
+Den resulterende SDO vil inneholde samtlige signaturer. 
+Resultatet av dette kan formidles som en SDO i SDODokument i en egnet forsendelse. Dokumentene vil alltid inneholde mer 
+enn en signatur. Det er påkrevet at slike dokumenter er forseglet med et `<SDOSeal>`, det vil bli sjekket som en del av 
+valideringslogikken for disse SDO objekter.
 
 
 #### Forsegle SDO
@@ -737,9 +811,9 @@ SEID_SDO dynamicSDO = bidFacade.createDynamicSDO(cmsData.toArray(new PKCS7WithOC
 
 Forseglingen av SDO må foretas etter at alle signaturene har blitt lagt inn.
 
-### Signering av følgebrev med brukerstedssertifikat
+### Signering av følgebrev med virksomhetssertifikat
 
-Dette utføres som en ren serversignering uten brukerdialog i nettleser elle mobilenhet.
+Dette utføres som en ren serversignering uten brukerdialog i nettleser eller mobilenhet.
 
 ```java
 final byte[] contentToBeSigned = ByteStreams.toByteArray(inputStreamBIDXMLFoelgebrev);
@@ -759,31 +833,32 @@ final byte[] contentToBeSigned = ByteStreams.toByteArray(inputStreamBIDXMLFoelge
             final byte[] sdoXMLBytes = serverSignedSDO.toXML();
 ```
 
-Dette vil gi en SDO som er signert med et brukerstedssertifikat. Det base64 encodede resulatet av dette kan benyttes som SDOElement i følgebrev. Virksomhet som signerer må være eksistere i enhetsregisteret uavhengig av sertifikatsstatus og eventuell gyldighetsperiode på det pågjeldende sertifikatet.
+Dette vil gi en SDO som er signert med et virksomhetssertifikat. Det base64 encodede resulatet av dette kan benyttes som 
+SDOElement i følgebrev. Det valideres at virksomheten som signerer er registrert i enhetsregisteret, og at sertifikatet har
+gyldig sertifikatsstatus og er benyttet innenfor gyldighetsperioden.
 
-Det er et krav om at det er brukerstedssertifkat som anvendes når følgebrevet signeres.
+Det er et krav om at det er virksomhetssertifikat som anvendes når følgebrevet signeres.
+Det er også virksomhetssertifikat som skal benyttes når man skal signere følgebrev og dokument sammen. 
 
-Det er også brukerstedssertifikatet som skal benyttes når man skal signere følgebrev og dokument sammen. Det valideres på at et slik sertifikat har blitt benyttet når dette skal valideres.
+#### Merknad om virksomhetssertifikat
 
-#### Merknad om brukerstedssertifikat
+Løsningen støtter virksomhetssertifikater utstedt av BankId og av Buypass.
 
-Brukerstedssertifikatet til BankId må ha en av to følgende oid (Object Identifier):
+Virksomhetssertifikat utstedt av BankId må ha en av følgende oid (Object Identifier):
 
 * 2.16.578.1.16.1.6.1.1 Soft Merchant
 * 2.16.578.1.16.1.6.2.1 HSM Merchant
 
-Hvis sertifikatet som har blitt brukt til å signere følgebrevet ikke er en av disse to typene så vil forsendelsen bli avvist med egnet kontrollresultat. 
+Virksomhetssertifikat utstedt av Buypass må ha en av følgende oid (Object Identifier):
 
-For å forenkle bruken så er det ikke et krav om at brukerstedssertifikatet skal være registrert hos Kartverket. Det betyr at Kartverket henter organisasjonsnummer i fra Subject-strengen basert på de kravene som er fremsatt i [SEID Leveranse 1](https://www.regjeringen.no/globalassets/upload/FAD/Vedlegg/IKT-politikk/SEID_Leveranse_1_-_v1.02.pdf) som er den spesifikasjonen som BankId skal følge i henhold til fremsatte krav om PKI i offentlig sektor. Organisasjonsnummeret hentes fra IdAtSerialNumber(oid: 2.5.4.5). Dette organisasjonsnummeret må være det samme som den rettighetshaver man ønsker å opptre som når man skal signere som rettighetshaver for eksempel på følgebrev og dokumenter sammen. Dette gjelder eksempelvis for slettinger i et maskin til maskin scenario. Eksempler på formattering av organisasjonsnummer i dette feltet:
+* 2.16.578.1.26.1.3.2 Soft Enterprise
+* 2.16.578.1.26.1.3.5 Hard Enterprise
+* 2.16.578.1.26.1.0.3.2 Soft Enterprise Test
 
-* NO XXXXXXXXX
-* NO XXX XXX XXX eller bare 
-* XXX XXX XXX
+Hvis sertifikatet som har blitt brukt til å signere følgebrevet ikke er en av disse typene, vil forsendelsen bli avvist med egnet kontrollresultat. 
 
-Hvis dette identifikasjonsnummeret ikke er utstedt til riktig enhet i organisasjonen så vil det heller ikke fungere når man skal signere følgebrev og dokumenter sammen. Det er derfor viktig å sjekke dette når man mottar det bestilte sertifikatet.
+Det er ikke et krav om at virksomhetssertifikatet skal være registrert hos Kartverket.
 
-Brukerstedssertifikat kan i utgangspunktet ikke benyttes til signering av dokumenter som rettighetshaver med unntak av tilfelle der man bruker dette sertifikatet til å signere både følgebrev og dokument(er). En melding som inneholder slike dokumenter vil i utgangspunktet bli avvist.
- 
 ## 10. Statustjeneste for systemet
 
 Det er tilgjengeliggjort en tjeneste som skal gi status for om systemet er tilgjengelig eller ikke. Tjenesten gir status for tre deler av systemet: Innsendingstjenestene, Valideringstjenesten og Grunnbokstjenestene. Status for hver av systemene kan være en av følgende:
