@@ -1,0 +1,38 @@
+# nonk8s
+apiVersion: "backstage.io/v1alpha1"
+kind: "Component"
+metadata:
+  name: "etinglysing-systembeskrivelse"
+  tags:
+  - "public"
+spec:
+  type: "documentation"
+  lifecycle: "production"
+  owner: "Digibok"
+  system: "grunnbok"
+---
+apiVersion: "backstage.io/v1alpha1"
+kind: "Group"
+metadata:
+  name: "security_champion_etinglysing-systembeskrivelse"
+  title: "Security Champion etinglysing-systembeskrivelse"
+spec:
+  type: "security_champion"
+  parent: "eiendom_security_champions"
+  members:
+  - "haakl"
+  children:
+  - "resource:etinglysing-systembeskrivelse"
+---
+apiVersion: "backstage.io/v1alpha1"
+kind: "Resource"
+metadata:
+  name: "etinglysing-systembeskrivelse"
+  links:
+  - url: "https://github.com/kartverket/etinglysing-systembeskrivelse"
+    title: "etinglysing-systembeskrivelse på GitHub"
+spec:
+  type: "repo"
+  owner: "security_champion_etinglysing-systembeskrivelse"
+  dependencyOf:
+  - "component:etinglysing-systembeskrivelse"
